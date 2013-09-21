@@ -2,7 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/reloader'
-require 'pry'
+# require 'pry'
 # require 'pry-require_relative'
 require 'thin'
 require 'unirest'
@@ -39,7 +39,8 @@ post '/add_event' do
   @deadline = params[:deadline]
 
   new_event = GameStarter::Event.new(@event_time, @deadline, @event_name, @event_location, @minimum_attendees, @maximum_attendees, @creator_name, @creator_phone, @creator_email) 
-  @response = new_event.add_to_firebase
+  new_event.add_to_firebase
+  #@response = 
   # content_type :json
   # "#{@response}"
   # erb :test
