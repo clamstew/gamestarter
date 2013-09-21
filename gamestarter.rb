@@ -5,7 +5,7 @@ require 'sinatra/reloader'
 require 'pry'
 require 'pry-require_relative'
 
-require_relative '/lib/event.rb'
+require_relative 'lib/event'
 
 get '/' do
 
