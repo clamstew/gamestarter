@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>game > starter</title>
+
+        <link rel="stylesheet" href="application.css" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/foundation/4.3.1/css/foundation.min.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+        <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.0.3/jquery-2.0.3.js"></script>
+        <script type="text/javascript" src="application.js"></script>
+        <!--<script type="text/javascript" src="//cdn.jsdelivr.net/foundation/4.3.1/js/foundation.min.js"></script>-->
+        <!--<script type="text/javascript" src="//cdn.jsdelivr.net/foundation/4.3.1/js/foundation/foundation.tooltips.js"></script>-->
+        <script>
+          //$(document).foundation();
+            // $(document).foundation('tooltips', {callback: myCallbackFunction}, function (response) {
+            //   console.log(response.errors);
+            // });
+        </script>
+
+    </head>
+
+    <body>
+        <%= erb :_header %>
+        <div class="row">
+            <div class="large-12 columns">
+                <%= yield %>
+            </div>
+        </div>
+        <%= erb :_footer %>
+    </body>
+
+</html>

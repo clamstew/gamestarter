@@ -1,0 +1,35 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,800,600,700);
+
+body {
+	font-family: 'Open Sans', 'Helvetica', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0px;
+	padding: 0;
+	line-height: 0;
+}
+
+h3#big-icon {
+	font-size: 10em;
+	text-decoration: underline;
+}
+
+h3#main-logo {
+	font-size: 5em;
+	text-decoration: underline;
+}
+
+h3#main-logo .red {
+	color: #c20017;
+}
+
+/* ---- hero unit ----*/
+
+section.hero-unit {
+	text-align: center;
+	line-height: 10px;
+	background: #cccccc;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+}
