@@ -43,7 +43,11 @@ post '/add_event' do
   new_event.add_to_firebase
   
   erb :form_result
+end
 
+get '/reply' do
+  erb :reply
+  
   
 end
 

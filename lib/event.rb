@@ -105,6 +105,13 @@ module GameStarter
       @attending = true
     end
 
+    def get_event_from_firebase(id)
+      id = "-J40Lnj97rZTXyLq-7mq"
+      response = Unirest::get("https://gamestarter.firebaseio.com/events/#{id}.json",
+        { "Accept" => "application/json" })
+      response_body = response.body
+    end
+
     private
 
   end
