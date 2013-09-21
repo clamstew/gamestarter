@@ -1,13 +1,14 @@
 require 'rubygems'
 require 'bundler/setup'
+require 'firebase'
 
 module GameStarter
   
   class Event 
     attr_accessor :creator, :time, :deadline, :event_name, :location, :attendees, :minimum, :maximum, :creator_name, :phone, :email
     
-    def initialize (time, deadline, event_name, location, attendees, minimum, maximum, creator_name, phone, email)
-      @creator = Creator.new(creator_name, phone, email)
+    def initialize (time, deadline, event_name, location, minimum, maximum, creator_name, phone, email)
+      @creator = GameStarter::Creator.new(creator_name, phone, email)
       @time = time
       @deadline = deadline
       @event_name = event_name
@@ -28,17 +29,26 @@ module GameStarter
     def add_to_firebase
       # code to send to fb
       new_event = {
-        creator: @creator, # passes in a creator object
+        creator: {
+          name: @creator.name,
+          phone: @creator.phone, 
+          email: @creator.email
+        },
         time: @time,
         deadline: @deadline, 
         event_name: @event_name, 
         location: @location, 
-        attendees: @attendees
+        attendees: @attendees,
         minimum: @minimum, 
         maximum: @maximum
       }
-      ## SEND TO FIREBASE:
-      # Firebase.set(new_event)
+      Firebase.base_uri = 'https://gamestarter.firebaseio.com/'
+
+      response = Firebase.push("events", new_event)
+      # puts response.success? # => true
+      # puts response.code # => 200
+      # puts response.body # => { 'name' => "-INOQPH-aV_psbk3ZXEX" }
+      # puts response.raw_body # => '{"name":"-INOQPH-aV_psbk3ZXEX"}'
     end
 
     def send_invite_email_to_attendees email
@@ -68,8 +78,8 @@ module GameStarter
   end
 
   class Creator
-    attr_accessor :name, :email
-    def intialize name, phone, email
+    attr_accessor :name, :phone, :email
+    def initialize name, phone, email
       @name = name
       @phone = phone
       @email = email
