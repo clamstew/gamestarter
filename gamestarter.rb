@@ -19,6 +19,7 @@ get '/new_event' do
 end
 
 post '/add_event' do
+  @event_name = params[:event_name]
   # form in /new_event posts to here for processing
-  'event sent. .. redirect to home'
+  "event sent. .. redirect to home #{@event_name}"
 end
