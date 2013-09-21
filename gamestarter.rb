@@ -26,6 +26,7 @@ get '/new_event' do
 end
 
 post '/add_event' do 
+  
   @event_name = params[:event_name]
   # form in /new_event posts to here for processing
   @creator_name = params[:creator_name]
@@ -40,10 +41,8 @@ post '/add_event' do
 
   new_event = GameStarter::Event.new(@event_time, @deadline, @event_name, @event_location, @minimum_attendees, @maximum_attendees, @creator_name, @creator_phone, @creator_email) 
   new_event.add_to_firebase
-  #@response = 
-  # content_type :json
-  # "#{@response}"
-  # erb :test
+  
+  erb :form_result
 
   
 end
