@@ -1,4 +1,5 @@
 Gamestarter: It Gets It Going &trade;
+=====================================
 
 A project from [Clay Stewart](http://www.github.com/clamstew), [Joe Wagner](http://www.github.com/bangner), and [Taylor Smith](http://www.github.com/taylor-smith).
 
