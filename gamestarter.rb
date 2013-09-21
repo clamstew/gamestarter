@@ -34,12 +34,12 @@ post '/add_event' do
   @creator_phone = params[:creator_phone]
   @event_time = params[:event_time]
   @event_location = params[:event_location]
-  @attendees = params[:attendees]
+  @invitees = params[:invitees]
   @minimum_attendees = params[:minimum_attendees]
   @maximum_attendees = params[:maximum_attendees]
   @deadline = params[:deadline]
 
-  new_event = GameStarter::Event.new(@event_time, @deadline, @event_name, @event_location, @minimum_attendees, @maximum_attendees, @creator_name, @creator_phone, @creator_email) 
+  new_event = GameStarter::Event.new(@event_time, @deadline, @event_name, @event_location, @minimum_attendees, @maximum_attendees, @creator_name, @creator_phone, @creator_email, @invitees) 
   new_event.add_to_firebase
   
   erb :form_result

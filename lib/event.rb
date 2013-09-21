@@ -8,9 +8,9 @@ require 'json'
 module GameStarter
   
   class Event 
-    attr_accessor :creator, :time, :deadline, :event_name, :location, :attendees, :minimum, :maximum
+    attr_accessor :creator, :time, :deadline, :event_name, :location, :attendees, :minimum, :maximum, :invitees
     
-    def initialize (event_time, deadline, event_name, event_location, minimum_attendees, maximum_attendees, creator_name, phone, email)
+    def initialize (event_time, deadline, event_name, event_location, minimum_attendees, maximum_attendees, creator_name, phone, email, invitees)
       @creator = GameStarter::Creator.new(creator_name, phone, email)
       @event_time = event_time
       @deadline = deadline
@@ -21,6 +21,7 @@ module GameStarter
       @maximum_attendees = maximum_attendees
       @create_date = Time.now()
       @modify_date = Time.now()
+      @invitees = populate_invitee_array(invitees)
     end
 
     # MIGHT BE COVERED IN THE INITIALIZE FUNCTION
@@ -33,7 +34,7 @@ module GameStarter
       new_event = {
         creator: {
           name: @creator.name,
-          phone: @creator.phone, 
+          phone: @creator.phone,
           email: @creator.email
         },
         time: @event_time,
@@ -74,6 +75,10 @@ module GameStarter
       def send_email_message email_array
         # mandrill logic (hopefully on an array)
         # return true or false
+      end
+
+      def populate_invitee_array(invitees)
+        @invitees = invitees.split(',')
       end
 
   end
