@@ -3,13 +3,93 @@ require 'bundler/setup'
 
 module GameStarter
   
-  class Event
+  class Event 
+    attr_accessor :creator, :time, :deadline, :event_name, :location, :attendees, :minimum, :maximum, :creator_name, :phone, :email
     
+    def initialize (time, deadline, event_name, location, attendees, minimum, maximum, creator_name, phone, email)
+      @creator = Creator.new(creator_name, phone, email)
+      @time = time
+      @deadline = deadline
+      @event_name = event_name
+      @location = location
+      @attendees = [] # this will be num attendees with .count
+      @minimum = minimum
+      @maximum = maximum
+      @create_date = Time.now()
+      @modify_date = Time.now()
+    end
+
+    # MIGHT BE COVERED IN THE INITIALIZE FUNCTION
+    # def add_attendees (attendees_array)
+    #   attendees_array.each do |x|
+    #     @attendees << x
+    #   end
+    # end
+    def add_to_firebase
+      # code to send to fb
+      new_event = {
+        creator: @creator, # passes in a creator object
+        time: @time,
+        deadline: @deadline, 
+        event_name: @event_name, 
+        location: @location, 
+        attendees: @attendees
+        minimum: @minimum, 
+        maximum: @maximum
+      }
+      ## SEND TO FIREBASE:
+      # Firebase.set(new_event)
+    end
+
+    def send_invite_email_to_attendees email
+      @attendees.each do |attendee|
+        
+      end
+      # might just call send email message on whole array ??? 
+    end
+
+    def send_if_game_on_or_off
+      # logic that looks at datetime and returns on if
+      #  current time is not past date time
+    end
+
+    private 
+
+      # Use this to house all the API logic for Mandrill or Gmail
+      #
+      # emails - The Array of email addresses
+      # 
+      # returns true or false if emails are send or not
+      def send_email_message email_array
+        # mandrill logic (hopefully on an array)
+        # return true or false
+      end
+
   end
 
   class Creator
+    attr_accessor :name, :email
+    def intialize name, phone, email
+      @name = name
+      @phone = phone
+      @email = email
+      # @attending = attending 
+    end
+
   end
 
   class Attendee
+    attr_accessor :email
+    def intialize email
+      @email = email
+      @attending = false 
+    end
+
+    def attending_reply 
+      @attending = true
+    end
+
+    private
+
   end
 end
