@@ -96,7 +96,7 @@ module GameStarter
 
   class Attendee
     attr_accessor :email
-    def intialize email
+    def initialize email
       @email = email
       @attending = false 
     end
@@ -106,7 +106,7 @@ module GameStarter
     end
 
     def get_event_from_firebase(id)
-      id = "-J40Lnj97rZTXyLq-7mq"
+      # id = "-J41ONHpHKmFRknPIpIP"
       response = Unirest::get("https://gamestarter.firebaseio.com/events/#{id}.json",
         { "Accept" => "application/json" })
       response_body = response.body

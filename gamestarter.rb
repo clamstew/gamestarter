@@ -45,7 +45,14 @@ post '/add_event' do
   erb :form_result
 end
 
-get '/reply' do
+get '/reply/:event_id/:invitee_email' do
+  @event_id = params[:event_id]
+  @invitee_email = params[:invitee_email]
+  attendee = GameStarter::Attendee.new(params[:invitee_email])
+  @result = attendee.get_event_from_firebase(params[:event_id])
+  # @result = JSON.load(@result)
+  # @code = result.code
+
   erb :reply
   
   

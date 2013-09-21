@@ -24,6 +24,10 @@ h3#main-logo .red {
 	color: #c20017;
 }
 
+div.grey-box {
+	background: #cccccc;
+}
+
 /* ---- hero unit ----*/
 
 section.hero-unit {

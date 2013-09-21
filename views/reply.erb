@@ -1,23 +1,40 @@
+<div class="row">
+	<div class="large-2 columns">
+		<form action="/im_in" method="post">
+			<input type="submit" class="button" value="I'm in!" data-email="<%= @invitee_email %>" data-event="<%= @event_id %>">
+		</form>
+	</div>
+	<div class="large-10 columns">
+		<strong>Event Name:</strong> <%= @result['location'] %>
+		<h4><%= @invitee_email %> are you in?</h4>
+	</div>
+</div>
+<h2>Event ID: <%= @event_id %></h2>
 
+<h2>Result code: <%= @code %></h2>
 
+<h2>Email: <%= @invitee_email %></h2>
 
-<p>
-	Creator: <%= @creator_name %>
+<pre>
+	<%= @result %>
+</pre>
+
+<div class="grey-box">
+	<strong>Creator:</strong> <%= @result['creator']['name'] %>
 	<br/>
-	Event Name: <%= @event_name %>
+	<strong>Event Name:</strong> <%= @result['location'] %>
 	<br/>
-	Event Time: <%= @event_time %>
+	<strong>Event Time:</strong> <%= @result['time'] %>
 	<br/>
-	Deadline: <%= @deadline %>
+	<strong>Deadline:</strong> <%= @result['deadline'] %>
 	<br/>
-	Event Location: <%= @event_location %>
+	<strong>Event Location:</strong> <%= @result['event_name'] %>
 	<br/>
-	Minimum Attendees: <%= @minimum_attendees %>
+	<strong>Minimum Attendees:</strong> <%= @result['minimum'] %>
 	<br/>
-	Maximum Attendees: <%= @maximum_attendees %>
+	<strong>Maximum Attendees:</strong> <%= @result['maximum'] %>
 	<br/>
-	Invitees: <%= @invitees %>
+	<strong>Invitees:</strong> <% #@invitees.each{ |x| puts x } %>
 	
-</p>
+</div>
 
-<input type="button" class="button" value="I'm in!">
