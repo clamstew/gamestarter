@@ -3,7 +3,10 @@ require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'pry'
-require 'pry-require_relative'
+# require 'pry-require_relative'
+require 'thin'
+require 'unirest'
+require 'json'
 
 require_relative 'lib/event'
 
@@ -22,7 +25,7 @@ get '/new_event' do
   erb :add_event_form
 end
 
-post '/add_event' do
+post '/add_event' do 
   @event_name = params[:event_name]
   # form in /new_event posts to here for processing
   @creator_name = params[:creator_name]
@@ -36,7 +39,23 @@ post '/add_event' do
   @deadline = params[:deadline]
 
   new_event = GameStarter::Event.new(@event_time, @deadline, @event_name, @event_location, @minimum_attendees, @maximum_attendees, @creator_name, @creator_phone, @creator_email) 
+  @response = new_event.add_to_firebase
+  # content_type :json
+  # "#{@response}"
+  # erb :test
+
   
-  new_event.add_to_firebase
 end
+
+
+
+
+
+
+
+
+
+
+
+
 

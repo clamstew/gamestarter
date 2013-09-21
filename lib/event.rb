@@ -1,6 +1,9 @@
 require 'rubygems'
 require 'bundler/setup'
-require 'firebase'
+# require 'firebase'
+require 'debugger'
+require 'unirest'
+require 'json'
 
 module GameStarter
   
@@ -27,7 +30,6 @@ module GameStarter
     #   end
     # end
     def add_to_firebase
-      # code to send to fb
       new_event = {
         creator: {
           name: @creator.name,
@@ -44,13 +46,10 @@ module GameStarter
         create_date: @create_date,
         modify_date: @modify_date
       }
-      Firebase.base_uri = 'https://gamestarter.firebaseio.com/'
+      new_event = new_event.to_json
 
-      response = Firebase.push("events", new_event)
-      # puts response.success? # => true
-      # puts response.code # => 200
-      # puts response.body # => { 'name' => "-INOQPH-aV_psbk3ZXEX" }
-      # puts response.raw_body # => '{"name":"-INOQPH-aV_psbk3ZXEX"}'
+      response = Unirest::post "https://gamestarter.firebaseio.com/events.json",
+        { "Accept" => "application/json" }, new_event
     end
 
     def send_invite_email_to_attendees email
