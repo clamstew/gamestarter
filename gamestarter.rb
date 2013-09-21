@@ -13,10 +13,10 @@ get '/' do
   erb :index
 end
 
-get '/event' do
-  example_event = GameStarter::Event.new(time, deadline, event_name, location, attendees, minimum, maximum, creator_name, phone, email)
-  example_event.inspect
-end
+# # get '/event' do
+# #   example_event = GameStarter::Event.new(time, deadline, event_name, event_location, attendees, minimum, maximum, creator_name, phone, email)
+# #   example_event.inspect
+# end
 
 get '/new_event' do
   erb :add_event_form
@@ -37,8 +37,6 @@ post '/add_event' do
 
   new_event = GameStarter::Event.new(@event_time, @deadline, @event_name, @event_location, @minimum_attendees, @maximum_attendees, @creator_name, @creator_phone, @creator_email) 
   
-  binding.pry
-
   new_event.add_to_firebase
 end
 

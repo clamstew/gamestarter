@@ -5,7 +5,7 @@ require 'firebase'
 module GameStarter
   
   class Event 
-    attr_accessor :creator, :time, :deadline, :event_name, :location, :attendees, :minimum, :maximum, :creator_name, :phone, :email
+    attr_accessor :creator, :time, :deadline, :event_name, :location, :attendees, :minimum, :maximum
     
     def initialize (event_time, deadline, event_name, event_location, minimum_attendees, maximum_attendees, creator_name, phone, email)
       @creator = GameStarter::Creator.new(creator_name, phone, email)
@@ -40,7 +40,9 @@ module GameStarter
         location: @event_location, 
         attendees: @attendees,
         minimum: @minimum_attendees, 
-        maximum: @maximum_attendees
+        maximum: @maximum_attendees,
+        create_date: @create_date,
+        modify_date: @modify_date
       }
       Firebase.base_uri = 'https://gamestarter.firebaseio.com/'
 
