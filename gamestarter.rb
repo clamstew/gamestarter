@@ -3,8 +3,9 @@ require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'pry'
+require 'pry-require_relative'
 
-require_relative 'lib/event'
+require_relative '/lib/event.rb'
 
 get '/' do
 
