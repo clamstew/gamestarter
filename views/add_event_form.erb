@@ -1,38 +1,61 @@
 
 
-<h1>Create a new Event</h1>
+<h3>Create New Event</h3>
 
 <form id="new-event-form" action="/add_event" method="post">
 
 	<label for="event_name">Event Name</label>
 	<input name="event_name" type="text" placeholder="Describe your event in a short title ... " />
 
-	<label for="creator_name">Creator Name: (Your full name)</label>
-	<input name="creator_name" type="text" placeholder="Type your name" />
+	<div class="row">
+		<div class="large-4 columns">
+			<label for="creator_name">Creator Name: (Your full name)</label>
+			<input name="creator_name" type="text" placeholder="Type your name" />
+		</div>
+		<div class="large-4 columns">
+			<label for="creator_email">Creator Email:</label>
+			<input name="creator_email" type="text" placeholder="e.g. alice@example.com" />
+		</div>
+		<div class="large-4 columns">
+			<label for="creator_phone">Creator Phone:</label>
+			<input name="creator_phone" type="text" placeholder="e.g. (512)-555-5555" />
+		</div>
+	</div>
 
-	<label for="creator_email">Creator Email:</label>
-	<input name="creator_email" type="text" placeholder="e.g. alice@example.com" />
+	<div class="row">
+		<div class="large-4 columns">
+			<label for="event_location">Event Location:</label>
+			<input name="event_location" type="text" placeholder="(e.g. 716 Congress Ave, Austin, TX 78712)" />
+		</div>
+		<div class="large-4 columns">
+			<label for="event_time">Event Time:</label>
+			<input name="event_time" type="text" placeholder="(e.g. 10am August 24, 2013)" />
+		</div>
+		<div class="large-4 columns">
+			<label for="deadline">When is the deadline for signup:</label>
+			<input name="event_time" type="text" placeholder="(e.g. 10am August 24, 2013)" />
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="large-6 columns">
+			<label for="minimum-attendees">Minimum number of attendees:</label>
+			<input type="number" name="minimum_attendees" value="3" /> 
+		</div>
+		<div class="large-6 columns">
+			<label for="maximum-attendees">Maximum number of attendees:</label>
+			<input type="number" name="maximum_attendees" value="7" /> 
+		</div>
+	</div>
 
-	<label for="creator_phone">Creator Phone:</label>
-	<input name="creator_phone" type="text" placeholder="e.g. (512)-555-5555" />
-
-	<label for="event_time">Event Time:</label>
-	<input name="event_time" type="text" placeholder="(e.g. 10am August 24, 2013)" />
-
-	<label for="event_location">Location:</label>
-	<input name="event_location" type="text" placeholder="(e.g. 716 Congress Ave, Austin, TX 78712)" />
-
-	<label for="invitees">Attendees:</label>
+	<label for="invitees">Attendees Emails (please separate with "," commas):</label>
 	<textarea name="invitees" placeholder="Please comma seperate. (e.g. bill@example.org, alice@example.com, greg@something.org, ...)"></textarea>
 
-	<label for="minimum-attendees">Minimum number of attendees:</label>
-	<input type="number" name="minimum_attendees" value="1" /> 
+	
 
-	<label for="maximum-attendees">Maximum number of attendees:</label>
-	<input type="number" name="maximum_attendees" value="10" /> 
+	
 
-	<label for="deadline">When is the deadline:</label>
-	<input name="event_time" type="text" placeholder="(e.g. 10am August 24, 2013)" />
+	
 
 	<input type="submit" class="large success button pink" value="SEND" />
 </form>

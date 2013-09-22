@@ -36,10 +36,20 @@ h1#topnav-logo span.pink {
 
 nav ul#top-nav {
 	list-style: none;
+	margin: 20px 0 0 0;
 }
 
 nav ul#top-nav li {
 	display: inline;
+	padding: 0px 5px; 
+}
+nav ul#top-nav li:hover {
+	background: #2ba6cb;
+	/*color: #ffffff;*/
+}
+nav ul#top-nav li a:hover {
+
+	color: #ffffff;
 }
 
 /* ---- hero unit ----*/
@@ -59,3 +69,11 @@ section.hero-unit {
 input[type=submit].large.success.button.pink {
 	background: #f5538a;
 }
+
+/* ---- footer  ----*/
+
+footer {
+	margin-bottom: 20px;
+	text-align: center;
+}
+
