@@ -29,6 +29,10 @@ div.grey-box {
 }
 
 /*----- top nav -----*/
+h1#topnav-logo span.pink {
+	color: #ff328f;
+}
+
 
 nav ul#top-nav {
 	list-style: none;
@@ -45,5 +49,9 @@ section.hero-unit {
 }
 
 .hero-button-wrapper p a.large.alert.button {
+	background: #f5538a;
+}
+
+input[type=submit].large.success.button.pink {
 	background: #f5538a;
 }
