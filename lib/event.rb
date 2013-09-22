@@ -128,7 +128,7 @@ module GameStarter
 
     def send(emails)
       # flock = Flock.new(["mrshaasha","sagarispatel","s_byrne","techpeace","makersquare","youssifwashere","lydiaguarino","jeremyjboyd"])
-      email_body = flock.email_format
+      email_body = "Fuck Your Couch"
       gmail = Gmail.connect(@@username, @@password)
       emails.each do |recipient|
         email = gmail.compose do
