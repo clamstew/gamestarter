@@ -52,12 +52,12 @@ get '/reply/:event_id/:invitee_email' do
   @result = attendee.get_event_from_firebase(params[:event_id])
   # @result = JSON.load(@result)
   # @code = result.code
-
-  erb :reply
-  
-  
+  erb :reply 
 end
 
+post '/im_in' do
+  
+end
 
 
 

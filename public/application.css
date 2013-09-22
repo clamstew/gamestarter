@@ -10,10 +10,10 @@ h1, h2, h3, h4, h5, h6 {
 /*	line-height: 0;*/
 }
 
-h3#big-icon {
+/*h3#big-icon {
 	font-size: 10em;
 	text-decoration: underline;
-}
+}*/
 
 h3#main-logo {
 	font-size: 5em;
@@ -28,6 +28,12 @@ div.grey-box {
 	background: #cccccc;
 }
 
+/*----- top nav -----*/
+
+nav ul#top-nav {
+	list-style: none;
+}
+
 /* ---- hero unit ----*/
 
 section.hero-unit {
@@ -36,4 +42,8 @@ section.hero-unit {
 	background: #cccccc;
 	border-radius: 20px;
 	-webkit-border-radius: 20px;
+}
+
+.hero-button-wrapper p a.large.alert.button {
+	background: #f5538a;
 }
