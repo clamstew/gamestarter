@@ -110,6 +110,7 @@ post '/im_in' do
           end
           i += 1
         end
+        @counter_of_attendees = i
         @new_attendees_array = @attendees_id[@first_key] = @attendees_id[@first_key] + ", #{@attendee_email}" 
         @new_attendees_array = @new_attendees_array.split(',')
         @new_attendees_array.collect! do |x|
@@ -120,20 +121,10 @@ post '/im_in' do
       elsif @attendees_id.is_a? Array
         # @new_attendees_array = 'this came back as an array'
         @new_attendees_array = @attendees_id << @attendee_email
+        @counter_of_attendees = @new_attendees_array.count
         response = Unirest::put("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
         { "Accept" => "application/json" }, @new_attendees_array.to_json)
       end
-      # response = JSON.load(@attendees.body)
-      
-      # @new_attendees_array = @new_attendees_array.split(',').strip()
-    ### convert @attendees from json to normal ruby array
-    ### @attendees_hash = JSON.parse(@attendees)
-    # @attendees_hash = @attendees.body["attendees"]["#{@attendees_id}"]
-    # @new_attendees_hash = attendees_hash["#{@attendees_id}"] << @attendee_email
-    # @new_attendees_hash = @new_attendees_hash.to_json
-    # ### @attendees << @attendee_email
-    # ### @attendees_json = @attendees.to_json
-    
   end
   # @awesome = @response.body
   # @response = JSON.load(@awesome)
