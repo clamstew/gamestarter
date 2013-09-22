@@ -92,6 +92,10 @@ module GameStarter
       # @attending = attending 
     end
 
+    def format_email
+      
+    end
+
   end
 
   class Attendee
@@ -114,5 +118,25 @@ module GameStarter
 
     private
 
+  end
+
+  class Email
+    @@username = ENV['GMAILUSER']
+    @@password = ENV['GMAILPSWD']
+
+    def self.send(emails)
+      # flock = Flock.new(["mrshaasha","sagarispatel","s_byrne","techpeace","makersquare","youssifwashere","lydiaguarino","jeremyjboyd"])
+      email_body = flock.email_format
+      gmail = Gmail.connect(@@username, @@password)
+      emails.each do |recipient|
+        email = gmail.compose do
+          to recipient
+          subject "Mother Flocker Weekly Leaderboard"
+          body email_body
+        end
+        email.deliver!
+      end
+      gmail.logout
+    end
   end
 end
