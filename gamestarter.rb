@@ -39,10 +39,18 @@ post '/add_event' do
   @maximum_attendees = params[:maximum_attendees]
   @deadline = params[:deadline]
 
+  # create an event in firebase database
   new_event = GameStarter::Event.new(@event_time, @deadline, @event_name, @event_location, @minimum_attendees, @maximum_attendees, @creator_name, @creator_phone, @creator_email, @invitees) 
-  new_event.add_to_firebase
+  result = new_event.add_to_firebase
+
+  # @event_id1 = result.raw_body
+  @event_id = result.raw_body[9..-3]
+  # @event_id = event_id["name"]
+
+  # send an email
   email = GameStarter::Email.new
-  email.send(new_event.invitees)
+  email.send(new_event.invitees, @event_id.to_s)
+
   erb :form_result
 end
 

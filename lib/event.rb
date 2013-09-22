@@ -126,17 +126,39 @@ module GameStarter
     @@username = ENV['GMAILUSER']
     @@password = ENV['GMAILPSWD']
 
-    def send(emails)
-      # flock = Flock.new(["mrshaasha","sagarispatel","s_byrne","techpeace","makersquare","youssifwashere","lydiaguarino","jeremyjboyd"])
-      email_body = "Fuck Your Couch"
+    def send(emails, event_id)
       gmail = Gmail.connect(@@username, @@password)
       emails.each do |recipient|
-        email = gmail.compose do
-          to recipient
+        # email = gmail.compose do
+        #   reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient}"
+        #   text_part do
+        #     body "Game Starter. Go to this address in your webaddress: #{reply_url}"
+        #   end
+        #   html_part do
+        #     content_type 'text/html; charset=UTF-8'
+        #     body "<h3>Game Starter</h3><p>Are you attending: <a href=" + reply_url + ">I'm In</a></p>"
+
+        #   end
+        #   to recipient.strip()
+        #   subject "You've Got a New Event!"
+
+        # end
+        reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient}"
+        gmail.deliver do
+        # email = gmail.compose do
+          text_part do
+            body "Game Starter. Go to this address in your webaddress: #{reply_url}"
+          end
+          html_part do
+            content_type 'text/html; charset=UTF-8'
+            body "<h3>Game Starter</h3><p>Are you attending: <a href=" + reply_url + ">I'm In</a></p>"
+            # body "<p>Text of <em>html</em> message.</p>"
+          end
+          to recipient.strip()
           subject "You've Got a New Event!"
-          body email_body
+          # body body
         end
-        email.deliver!
+        
       end
       gmail.logout
     end
