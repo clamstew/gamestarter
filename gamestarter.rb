@@ -143,9 +143,8 @@ post '/im_in' do
         if @counter_of_attendees >= @minimum_attendees
           # send email to all attendees 
           # Send an email
-          email = GameStarter::Email.new
-          email.send_game_on(@new_attendees_array, @event_id)
-          
+          email_game_on = GameStarter::Email.new
+          email_game_on.send_game_on(@new_attendees_array, @event_id)
         end
       end
   end
