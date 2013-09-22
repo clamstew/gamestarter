@@ -88,11 +88,18 @@ post '/im_in' do
   @attendee_email = params[:invitee_email]
   @attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
   { "Accept" => "application/json" })
+
   @minimum_attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/minimum/.json",
   { "Accept" => "application/json" })
   @minimum_attendees = @minimum_attendees.body
   @minimum_attendees = @minimum_attendees.gsub(/[^0-9]/,'')
   @minimum_attendees = @minimum_attendees.to_i
+
+  @maximum_attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/minimum/.json",
+  { "Accept" => "application/json" })
+  @maximum_attendees = @maximum_attendees.body
+  @maximum_attendees = @maximum_attendees.gsub(/[^0-9]/,'')
+  @maximum_attendees = @maximum_attendees.to_i
   if @attendees.raw_body == "null"
     array = {}
     @attendees_body = @attendees.body
@@ -140,11 +147,19 @@ post '/im_in' do
         response = Unirest::put("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
         { "Accept" => "application/json" }, @new_attendees_array.to_json)
 
-        if @counter_of_attendees >= @minimum_attendees
+        if @counter_of_attendees == @minimum_attendees
           # send email to all attendees 
           # Send an email
           email_game_on = GameStarter::Email.new
           email_game_on.send_game_on(@new_attendees_array, @event_id)
+        elsif @counter_of_attendees > @minimum_attendees && @counter_of_attendees < @maximum_attendees
+          
+          email_game_on = GameStarter::Email.new
+          email_game_on.send_game_already_on(@attendee_email, @event_id)
+        
+        else @counter_of_attendees > @maximum_attendees
+          email_game_full = GameStarter::Email.new
+          email_game_full.send_game_rejection(@attendee_email, @event_id)
         end
       end
   end

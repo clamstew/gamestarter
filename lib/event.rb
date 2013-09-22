@@ -171,5 +171,45 @@ module GameStarter
       end
       gmail.logout
     end
+
+    def send_game_already_on(email, event_id)
+      gmail = Gmail.connect(@@username, @@password)
+      reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient.strip()}"
+      gmail.deliver do
+      # email = gmail.compose do
+        text_part do
+          body "Game on for this game: ______"
+        end
+        html_part do
+          content_type 'text/html; charset=UTF-8'
+          body "<h3>Game Starter</h3><h3>Game Is On</h3><p>You are In.</p>"
+          # body "<p>Text of <em>html</em> message.</p>"
+        end
+        to email.strip()
+        subject "Game On! | game > starter"
+        # body body
+      end
+      gmail.logout
+    end
+
+    def send_game_rejection(email, event_id)
+      gmail = Gmail.connect(@@username, @@password)
+      reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient.strip()}"
+      gmail.deliver do
+      # email = gmail.compose do
+        text_part do
+          body "Game full there are too many people.  The maximum is reached."
+        end
+        html_part do
+          content_type 'text/html; charset=UTF-8'
+          body "<h3>Game Starter</h3><h3>Too many people have replied.</h3><p>Catch you next time.</p>"
+          # body "<p>Text of <em>html</em> message.</p>"
+        end
+        to email.strip()
+        subject "Game Full | game > starter"
+        # body body
+      end
+      gmail.logout
+    end
   end
 end
