@@ -152,7 +152,7 @@ post '/im_in' do
           # Send an email
           email_game_on = GameStarter::Email.new
           email_game_on.send_game_on(@new_attendees_array, @event_id)
-        elsif @counter_of_attendees > @minimum_attendees && @counter_of_attendees < @maximum_attendees
+        elsif @counter_of_attendees > @minimum_attendees && @counter_of_attendees <= @maximum_attendees
           
           email_game_on = GameStarter::Email.new
           email_game_on.send_game_already_on(@attendee_email, @event_id)
