@@ -42,7 +42,7 @@ module GameStarter
         deadline: @deadline, 
         event_name: @event_name, 
         location: @event_location, 
-        attendees: @attendees,
+        attendees: [], #@attendees,
         minimum: @minimum_attendees, 
         maximum: @maximum_attendees,
         create_date: @create_date,

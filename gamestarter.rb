@@ -9,6 +9,8 @@ require 'json'
 
 require_relative 'lib/event'
 
+
+
 get '/' do
 
   # 'hello world'
@@ -66,14 +68,84 @@ end
 
 # Route for when attendees click "I'm In"
 post '/im_in' do
+  def json_to_sym_hash(json)
+    json.gsub!('\'', '"')
+    parsed = JSON.parse(json)
+    symbolize_keys(parsed)
+  end
+
+  def symbolize_keys(hash)
+    hash.inject({}){|new_hash, key_value|
+      key, value = key_value
+      value = symbolize_keys(value) if value.is_a?(Hash)
+      new_hash[key.to_sym] = value
+      new_hash
+    }
+  end
+
+
   @event_id = params[:event_id]
   @attendee_email = params[:invitee_email]
-  @attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees.json",
+  @attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
   { "Accept" => "application/json" })
-  @attendees << @attendee.email
-  response = Unirest::put("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees.json",
-  { "Accept" => "application/json" }, @attendees)
-  @attendees_count = @attendees.count
+  if @attendees.raw_body == "null"
+    array = {}
+    @attendees_body = @attendees.body
+    @attendees_body = array
+    # @attendees_body = array << @attendee_email
+      new_attendees_array = @attendees_body[:email1] = @attendee_email
+    ### @attendees_json = @attendees.body.to_a << 
+    # @attendees_json = @attendees_body.to_json
+    response = Unirest::post("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
+    { "Accept" => "application/json" }, new_attendees_array.to_json)
+  elsif @attendees.raw_body != "null"
+    # @attendees_id = @attendees.body[0] # 2..21
+      @attendees_id = @attendees.body
+      
+      if @attendees_id.is_a? Hash
+        i = 0
+        @attendees_id.each do |x,y| 
+          if i = 0
+            @first_key = x
+          end
+          i += 1
+        end
+        @new_attendees_array = @attendees_id[@first_key] = @attendees_id[@first_key] + ", #{@attendee_email}" 
+        @new_attendees_array = @new_attendees_array.split(',')
+        @new_attendees_array.collect! do |x|
+          x.strip
+        end
+        response = Unirest::put("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
+        { "Accept" => "application/json" }, @new_attendees_array.to_json)
+      elsif @attendees_id.is_a? Array
+        # @new_attendees_array = 'this came back as an array'
+        @new_attendees_array = @attendees_id << @attendee_email
+        response = Unirest::put("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
+        { "Accept" => "application/json" }, @new_attendees_array.to_json)
+      end
+      # response = JSON.load(@attendees.body)
+      
+      # @new_attendees_array = @new_attendees_array.split(',').strip()
+    ### convert @attendees from json to normal ruby array
+    ### @attendees_hash = JSON.parse(@attendees)
+    # @attendees_hash = @attendees.body["attendees"]["#{@attendees_id}"]
+    # @new_attendees_hash = attendees_hash["#{@attendees_id}"] << @attendee_email
+    # @new_attendees_hash = @new_attendees_hash.to_json
+    # ### @attendees << @attendee_email
+    # ### @attendees_json = @attendees.to_json
+    
+  end
+  # @awesome = @response.body
+  # @response = JSON.load(@awesome)
+  # if @response['attendees'] == "null"
+  #   @response['attendees'] = []
+  #   @response['attendees'] << "#{@attendee_email}"
+  #   @response_json = response.to_json
+  #   @response = Unirest::post("https://gamestarter.firebaseio.com/events/#{@event_id}.json", { "Accept" => "application/json" }, @response_json)
+  # end
+
+  
+  # @attendees_count = @attendees.count
   erb :attend_confirmation
 
 end
