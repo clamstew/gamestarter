@@ -1,23 +1,24 @@
 require 'mandrill'
+require 'unirest'
 require_relative 'event.rb'
 require_relative '../gamestarter.rb'
 
-mandrill = Mandrill::API.new 'kNgczOYvhEM7T32NFRHLeg'
+# mandrill = Mandrill::API.new 'kNgczOYvhEM7T32NFRHLeg'
 
 def send_attendee_email(email)
   begin
-    mandrill = Mandrill::API.new 'YOUR_API_KEY'
+    mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
     message = {"images"=>
         [{"type"=>"image/png", "name"=>"IMAGECID", "content"=>"ZXhhbXBsZSBmaWxl"}],
      "google_analytics_domains"=>["example.com"],
      "subaccount"=>"customer-123",
-     "bcc_address"=>"message.bcc_address@example.com",
+     "bcc_address"=>"twsmith89@gmail.com",
      "view_content_link"=>nil,
      "auto_html"=>nil,
      "track_clicks"=>nil,
      "tracking_domain"=>nil,
      "preserve_recipients"=>nil,
-     "from_email"=>"message.from_email@example.com",
+     "from_email"=>"TWSMITH89@gmail.com",
      "track_opens"=>nil,
      "headers"=>{"Reply-To"=>"message.reply@example.com"},
      "attachments"=>
@@ -29,34 +30,38 @@ def send_attendee_email(email)
             "vars"=>[{"name"=>"merge2", "content"=>"merge2 content"}]}],
      "merge"=>true,
      "signing_domain"=>nil,
-     "from_name"=>"Example Name",
-     "subject"=>"example subject",
+     "from_name"=>"Gamestarter",
+     "subject"=>"Hello World",
      "recipient_metadata"=>
-        [{"rcpt"=>"recipient.email@example.com", "values"=>{"user_id"=>123456}}],
+        [{"rcpt"=>"#{email}", "values"=>{"user_id"=>123456}}],
      "inline_css"=>nil,
-     "text"=>"Example text content",
-     "metadata"=>{"website"=>"www.example.com"},
+     "text"=>"Hello World",
+     "metadata"=>{"website"=>"gamestarter.herokuapp.com"},
      "return_path_domain"=>nil,
      "important"=>false,
      "google_analytics_campaign"=>"message.from_email@example.com",
-     "html"=>"<p>Example HTML content</p>",
+     "html"=>"<p>Hello World</p>",
      "tags"=>["password-resets"],
      "global_merge_vars"=>[{"name"=>"merge1", "content"=>"merge1 content"}],
      "auto_text"=>nil,
      "url_strip_qs"=>nil,
-     "to"=>[{"email"=>"recipient.email@example.com", "name"=>"Recipient Name"}]}
+     "to"=>[{"email"=>"twsmith89@gmail.com", "name"=>"Taylor Smith"}]}
     async = false
     ip_pool = "Main Pool"
-    send_at = "example send_at"
+    send_at =""
     result = mandrill.messages.send message, async, ip_pool, send_at
         # [{"status"=>"sent",
         #     "reject_reason"=>"hard-bounce",
         #     "email"=>"recipient.email@example.com",
         #     "_id"=>"abc123abc123abc123abc123abc123"}]
     
-rescue Mandrill::Error => e
+  rescue Mandrill::Error => e
     # Mandrill errors are thrown as exceptions
     puts "A mandrill error occurred: #{e.class} - #{e.message}"
     # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
     raise
+
+  response = Unirest::post "https://mandrillapp.com/api/1.0//messages/send.json",
+    { "Accept" => "application/json" }, message
+  end
 end
