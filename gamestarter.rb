@@ -117,7 +117,7 @@ post '/im_in' do
       if @attendees_id.is_a? Hash
         i = 0
         @attendees_id.each do |x,y| 
-          if i = 0
+          if i == 0
             @first_key = x
           end
           i += 1

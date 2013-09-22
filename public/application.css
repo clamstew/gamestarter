@@ -38,6 +38,10 @@ nav ul#top-nav {
 	list-style: none;
 }
 
+nav ul#top-nav li {
+	display: inline;
+}
+
 /* ---- hero unit ----*/
 
 section.hero-unit {
