@@ -126,7 +126,7 @@ module GameStarter
     @@username = ENV['GMAILUSER']
     @@password = ENV['GMAILPSWD']
 
-    def self.send(emails)
+    def send(emails)
       # flock = Flock.new(["mrshaasha","sagarispatel","s_byrne","techpeace","makersquare","youssifwashere","lydiaguarino","jeremyjboyd"])
       email_body = flock.email_format
       gmail = Gmail.connect(@@username, @@password)
