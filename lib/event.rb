@@ -93,6 +93,7 @@ module GameStarter
     end
 
     def format_email
+
       
     end
 
@@ -131,7 +132,7 @@ module GameStarter
       emails.each do |recipient|
         email = gmail.compose do
           to recipient
-          subject "Mother Flocker Weekly Leaderboard"
+          subject "You've Got a New Event!"
           body email_body
         end
         email.deliver!
