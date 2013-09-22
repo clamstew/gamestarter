@@ -65,7 +65,9 @@ get '/reply/:event_id/:invitee_email' do
 end
 
 post '/im_in' do
-  
+  @attendee_email = params[:invitee_email]
+  @event_id = params[:event_id]
+  erb :attend_confirmation  
 end
 
 
