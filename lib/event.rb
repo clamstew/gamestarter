@@ -23,6 +23,7 @@ module GameStarter
       @create_date = Time.now()
       @modify_date = Time.now()
       @invitees = populate_invitee_array(invitees)
+      @invitees = @invitees.collect{|x| x.strip}
     end
 
     # MIGHT BE COVERED IN THE INITIALIZE FUNCTION
@@ -143,7 +144,7 @@ module GameStarter
         #   subject "You've Got a New Event!"
 
         # end
-        reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient}"
+        reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient.strip()}"
         gmail.deliver do
         # email = gmail.compose do
           text_part do
