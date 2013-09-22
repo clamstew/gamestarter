@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'bundler/setup'
-# require 'firebase'
 require 'debugger'
 require 'unirest'
 require 'json'
