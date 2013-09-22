@@ -43,8 +43,8 @@ module GameStarter
         event_name: @event_name, 
         location: @event_location, 
         attendees: [], #@attendees,
-        minimum: @minimum_attendees, 
-        maximum: @maximum_attendees,
+        minimum: @minimum_attendees.to_i, 
+        maximum: @maximum_attendees.to_i,
         create_date: @create_date,
         modify_date: @modify_date
       }
@@ -129,20 +129,6 @@ module GameStarter
     def send(emails, event_id)
       gmail = Gmail.connect(@@username, @@password)
       emails.each do |recipient|
-        # email = gmail.compose do
-        #   reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient}"
-        #   text_part do
-        #     body "Game Starter. Go to this address in your webaddress: #{reply_url}"
-        #   end
-        #   html_part do
-        #     content_type 'text/html; charset=UTF-8'
-        #     body "<h3>Game Starter</h3><p>Are you attending: <a href=" + reply_url + ">I'm In</a></p>"
-
-        #   end
-        #   to recipient.strip()
-        #   subject "You've Got a New Event!"
-
-        # end
         reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient.strip()}"
         gmail.deliver do
         # email = gmail.compose do
@@ -156,6 +142,29 @@ module GameStarter
           end
           to recipient.strip()
           subject "You've Got a New Event!"
+          # body body
+        end
+        
+      end
+      gmail.logout
+    end
+    
+    def send_game_on(emails, event_id)
+      gmail = Gmail.connect(@@username, @@password)
+      emails.each do |recipient|
+        reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient.strip()}"
+        gmail.deliver do
+        # email = gmail.compose do
+          text_part do
+            body "Game on for this game: ______"
+          end
+          html_part do
+            content_type 'text/html; charset=UTF-8'
+            body "<h3>Game Starter</h3><h3>Game Is On</h3><p>You are In.</p>"
+            # body "<p>Text of <em>html</em> message.</p>"
+          end
+          to recipient.strip()
+          subject "Game On! | game > starter"
           # body body
         end
         

@@ -88,6 +88,11 @@ post '/im_in' do
   @attendee_email = params[:invitee_email]
   @attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
   { "Accept" => "application/json" })
+  @maximum_attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/maximum/.json",
+  { "Accept" => "application/json" })
+  @maximum_attendees = @maximum_attendees.body
+  @maximum_attendees = @maximum_attendees.gsub(/[^0-9]/,'')
+  @maximum_attendees = @maximum_attendees.to_i
   if @attendees.raw_body == "null"
     array = {}
     @attendees_body = @attendees.body
@@ -111,6 +116,9 @@ post '/im_in' do
           i += 1
         end
         @counter_of_attendees = i
+
+
+
         @new_attendees_array = @attendees_id[@first_key] = @attendees_id[@first_key] + ", #{@attendee_email}" 
         @new_attendees_array = @new_attendees_array.split(',')
         @new_attendees_array.collect! do |x|
@@ -118,12 +126,26 @@ post '/im_in' do
         end
         response = Unirest::put("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
         { "Accept" => "application/json" }, @new_attendees_array.to_json)
+
+        # if @counter_of_attendees >= @maximum_attendees
+          # send email to all attendees 
+          # email = GameStarter::Email.new
+          # email.send_game_on(@new_attendees_array, @event_id)
+        # end
+
       elsif @attendees_id.is_a? Array
         # @new_attendees_array = 'this came back as an array'
         @new_attendees_array = @attendees_id << @attendee_email
         @counter_of_attendees = @new_attendees_array.count
         response = Unirest::put("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
         { "Accept" => "application/json" }, @new_attendees_array.to_json)
+
+        if @counter_of_attendees >= @maximum_attendees
+          # send email to all attendees 
+          # Send an email
+          email = GameStarter::Email.new
+          email.send_game_on(@new_attendees_array, @event_id)
+        end
       end
   end
   # @awesome = @response.body
