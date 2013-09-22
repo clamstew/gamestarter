@@ -4,6 +4,7 @@ require 'bundler/setup'
 require 'debugger'
 require 'unirest'
 require 'json'
+require 'gmail'
 
 module GameStarter
   
