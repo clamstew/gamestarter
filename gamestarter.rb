@@ -68,31 +68,31 @@ end
 
 # Route for when attendees click "I'm In"
 post '/im_in' do
-  def json_to_sym_hash(json)
-    json.gsub!('\'', '"')
-    parsed = JSON.parse(json)
-    symbolize_keys(parsed)
-  end
+  # def json_to_sym_hash(json)
+  #   json.gsub!('\'', '"')
+  #   parsed = JSON.parse(json)
+  #   symbolize_keys(parsed)
+  # end
 
-  def symbolize_keys(hash)
-    hash.inject({}){|new_hash, key_value|
-      key, value = key_value
-      value = symbolize_keys(value) if value.is_a?(Hash)
-      new_hash[key.to_sym] = value
-      new_hash
-    }
-  end
+  # def symbolize_keys(hash)
+  #   hash.inject({}){|new_hash, key_value|
+  #     key, value = key_value
+  #     value = symbolize_keys(value) if value.is_a?(Hash)
+  #     new_hash[key.to_sym] = value
+  #     new_hash
+  #   }
+  # end
 
 
   @event_id = params[:event_id]
   @attendee_email = params[:invitee_email]
   @attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
   { "Accept" => "application/json" })
-  @maximum_attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/maximum/.json",
+  @minimum_attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/minimum/.json",
   { "Accept" => "application/json" })
-  @maximum_attendees = @maximum_attendees.body
-  @maximum_attendees = @maximum_attendees.gsub(/[^0-9]/,'')
-  @maximum_attendees = @maximum_attendees.to_i
+  @minimum_attendees = @minimum_attendees.body
+  @minimum_attendees = @minimum_attendees.gsub(/[^0-9]/,'')
+  @minimum_attendees = @minimum_attendees.to_i
   if @attendees.raw_body == "null"
     array = {}
     @attendees_body = @attendees.body
@@ -140,11 +140,12 @@ post '/im_in' do
         response = Unirest::put("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
         { "Accept" => "application/json" }, @new_attendees_array.to_json)
 
-        if @counter_of_attendees >= @maximum_attendees
+        if @counter_of_attendees >= @minimum_attendees
           # send email to all attendees 
           # Send an email
           email = GameStarter::Email.new
           email.send_game_on(@new_attendees_array, @event_id)
+          
         end
       end
   end
