@@ -2,8 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/reloader'
-# require 'pry'
-# require 'pry-require_relative'
+require 'pry'
 require 'thin'
 require 'unirest'
 require 'json'
@@ -21,10 +20,12 @@ end
 # #   example_event.inspect
 # end
 
+# New event form
 get '/new_event' do
   erb :add_event_form
 end
 
+# Route for event creators to add an event
 post '/add_event' do 
   
   @event_name = params[:event_name]
@@ -43,17 +44,16 @@ post '/add_event' do
   new_event = GameStarter::Event.new(@event_time, @deadline, @event_name, @event_location, @minimum_attendees, @maximum_attendees, @creator_name, @creator_phone, @creator_email, @invitees) 
   result = new_event.add_to_firebase
 
-  # @event_id1 = result.raw_body
-  @event_id = result.raw_body[9..-3]
-  # @event_id = event_id["name"]
+  @event_id = result.raw_body[9..-3]  
 
-  # send an email
+  # Send an email
   email = GameStarter::Email.new
   email.send(new_event.invitees, @event_id.to_s)
 
   erb :form_result
 end
 
+# Invitees are sent this route in an email when the creator specifies them
 get '/reply/:event_id/:invitee_email' do
   @event_id = params[:event_id]
   @invitee_email = params[:invitee_email]
@@ -64,20 +64,9 @@ get '/reply/:event_id/:invitee_email' do
   erb :reply 
 end
 
+# Route for when attendees click "I'm In"
 post '/im_in' do
   @attendee_email = params[:invitee_email]
   @event_id = params[:event_id]
   erb :attend_confirmation  
 end
-
-
-
-
-
-
-
-
-
-
-
-
