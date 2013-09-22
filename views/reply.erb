@@ -7,7 +7,7 @@
 		</form>
 	</div>
 	<div class="large-10 columns">
-		<strong>Event Name:</strong> <%= @result['location'] %>
+		<strong>Event Name:</strong> <%= @result['event_name'] %>
 		<h4><%= @invitee_email %> are you in?</h4>
 	</div>
 </div>
@@ -22,21 +22,22 @@
 </pre>
 
 <div class="grey-box">
+
 	<strong>Creator:</strong> <%= @result['creator']['name'] %>
 	<br/>
-	<strong>Event Name:</strong> <%= @result['location'] %>
+	<strong>Event Name:</strong> <%= @result['event_name'] %>
 	<br/>
 	<strong>Event Time:</strong> <%= @result['time'] %>
 	<br/>
 	<strong>Deadline:</strong> <%= @result['deadline'] %>
 	<br/>
-	<strong>Event Location:</strong> <%= @result['event_name'] %>
+	<strong>Event Location:</strong> <%= @result['location'] %>
 	<br/>
 	<strong>Minimum Attendees:</strong> <%= @result['minimum'] %>
 	<br/>
 	<strong>Maximum Attendees:</strong> <%= @result['maximum'] %>
 	<br/>
-	<strong>Invitees:</strong> <% #@invitees.each{ |x| puts x } %>
+	<strong>Invitees:</strong> <% @result['attendees'] %>
 	
 </div>
 
