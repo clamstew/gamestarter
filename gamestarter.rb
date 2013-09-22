@@ -66,7 +66,14 @@ end
 
 # Route for when attendees click "I'm In"
 post '/im_in' do
-  @attendee_email = params[:invitee_email]
   @event_id = params[:event_id]
-  erb :attend_confirmation  
+  @attendee_email = params[:invitee_email]
+  @attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees.json",
+  { "Accept" => "application/json" })
+  @attendees << @attendee.email
+  response = Unirest::put("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees.json",
+  { "Accept" => "application/json" }, @attendees)
+  @attendees_count = @attendees.count
+  erb :attend_confirmation
+
 end
