@@ -108,7 +108,8 @@ module GameStarter
       @attending = false 
     end
 
-    def attending_reply 
+    # When a user opts in to the event, set attending to true
+    def accept_invitation
       @attending = true
     end
 
