@@ -6,6 +6,7 @@ require 'pry'
 require 'thin'
 require 'unirest'
 require 'json'
+require 'mandrill'
 
 require_relative 'lib/event'
 
@@ -49,8 +50,10 @@ post '/add_event' do
   @event_id = result.raw_body[9..-3]  
 
   # Send an email
-  email = GameStarter::Email.new
-  email.send(new_event.invitees, @event_id.to_s)
+  # email = GameStarter::Email.new
+  # email.send(new_event.invitees, @event_id.to_s)
+  email = GameStarter::MandrillEmail.new()
+  email.send_are_you_in
 
   erb :form_result
 end

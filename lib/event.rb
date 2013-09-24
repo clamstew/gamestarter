@@ -4,6 +4,7 @@ require 'debugger'
 require 'unirest'
 require 'json'
 require 'gmail'
+require 'mandrill'
 
 module GameStarter
   
@@ -210,6 +211,27 @@ module GameStarter
         # body body
       end
       gmail.logout
+    end
+  end
+
+  class MandrillEmail
+    def send_are_you_in()
+      m = Mandrill::API.new
+      message = {  
+       :subject=> "New Event on Gamestarter",  
+       :from_name=> "GameStarter <noreply@eventstarter.co>",  
+       :text=>"You have a new gamestarter event. Are you in?",  
+       :to=>[  
+         {  
+           :email=> "",  
+           :name=> "Joe Smith"  
+         }  
+       ],  
+       :html=>"<html><h1>Hi <strong>message</strong>, are you in?</h1><p>Yes, <a href="">I'm in!</a></p></html>",  
+       :from_email=>"sender@yourdomain.com"  
+      }  
+      sending = m.messages.send message  
+      sending
     end
   end
 end

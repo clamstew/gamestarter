@@ -119,7 +119,7 @@ $(document).on('submit','#new-event-form', function(e){
 	var alertStatement = validateAddEventForm();
 	
 	if (alertStatement.length === 0) {
-		e.preventDefault();
+		// e.preventDefault();
 		$('#new-event-form-response').html('Form is good to go.').show();
 		console.log('in the form good to go condition');
 	} else {
