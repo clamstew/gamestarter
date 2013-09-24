@@ -9,7 +9,7 @@ require 'mandrill'
 module GameStarter
   
   class Event 
-    attr_accessor :creator, :time, :deadline, :event_name, :location, :attendees, :minimum, :maximum, :invitees
+    attr_accessor :creator, :event_time, :deadline, :event_name, :event_location, :attendees, :minimum_attendees, :maximum_attendees, :invitees
     
     def initialize (event_time, deadline, event_name, event_location, minimum_attendees, maximum_attendees, creator_name, phone, email, invitees)
       @creator = GameStarter::Creator.new(creator_name, phone, email)
