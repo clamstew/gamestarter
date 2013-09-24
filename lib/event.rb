@@ -9,7 +9,7 @@ require 'mandrill'
 module GameStarter
   
   class Event 
-    attr_accessor :creator, :time, :deadline, :event_name, :location, :attendees, :minimum, :maximum, :invitees
+    attr_accessor :creator, :event_time, :deadline, :event_name, :event_location, :attendees, :minimum_attendees, :maximum_attendees, :invitees
     
     def initialize (event_time, deadline, event_name, event_location, minimum_attendees, maximum_attendees, creator_name, phone, email, invitees)
       @creator = GameStarter::Creator.new(creator_name, phone, email)
@@ -102,16 +102,20 @@ module GameStarter
   end
 
   class Attendee
-    attr_accessor :email
+    attr_accessor :email, :attending
     def initialize email
       @email = email
       @attending = false 
     end
 
-    def attending_reply 
+    # When a user opts in to the event, set attending to true
+    def accept_invitation
       @attending = true
     end
 
+    # Grab event data from Firebase.
+    # id is a string argument that represents the location of the event needed.
+    # Returns response_body, a json object.
     def get_event_from_firebase(id)
       # id = "-J41ONHpHKmFRknPIpIP"
       response = Unirest::get("https://gamestarter.firebaseio.com/events/#{id}.json",
