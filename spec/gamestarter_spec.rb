@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
+require 'Mandrill'
 require 'rspec'
 require_relative '../gamestarter'
 
@@ -49,6 +50,15 @@ describe GameStarter::Attendee do
     it 'sets paramters correctly' do
       expect(example_three.email).to eq('tester@testing.com')
       expect(example_three.attending).to be_false
+    end
+  end
+end
+
+describe GameStarter::MandrillEmail do
+  describe '#send_are_you_in' do
+    let (:example_mail) {Mandrill::API.new}
+    it 'creates a Mandrill API object' do
+      expect(example_mail).to be_a(Mandrill::API)
     end
   end
 end
