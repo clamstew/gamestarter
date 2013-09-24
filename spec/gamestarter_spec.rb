@@ -39,3 +39,16 @@ describe GameStarter::Creator do
     end
   end
 end
+
+describe GameStarter::Attendee do
+  describe '.initialize' do
+    let(:example_three) {GameStarter::Attendee.new('tester@testing.com')}
+    it 'creates an attendee object' do
+      expect(example_three).to be_a(GameStarter::Attendee)
+    end
+    it 'sets paramters correctly' do
+      expect(example_three.email).to eq('tester@testing.com')
+      expect(example_three.attending).to be_false
+    end
+  end
+end

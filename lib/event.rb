@@ -102,7 +102,7 @@ module GameStarter
   end
 
   class Attendee
-    attr_accessor :email
+    attr_accessor :email, :attending
     def initialize email
       @email = email
       @attending = false 
