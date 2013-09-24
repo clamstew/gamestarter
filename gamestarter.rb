@@ -124,6 +124,7 @@ post '/im_in' do
           i += 1
         end
         @counter_of_attendees = i
+        # @TODO: put a pry thing here and see what i equals
 
         @new_attendees_array = @attendees_id[@first_key] = @attendees_id[@first_key] + ", #{@attendee_email}" 
         @new_attendees_array = @new_attendees_array.split(',')
@@ -136,10 +137,7 @@ post '/im_in' do
         # ======== IF MIN NUMBER IS 2 --- THEN EMAIL LOGIC ALSO NEEDS TO GO HERE
         #     EMAIL LOGIC
         if @counter_of_attendees == @minimum_attendees
-          # send email to all attendees 
-          # Send an email
-          # email_game_on = GameStarter::Email.new
-          # email_game_on.send_game_on(@new_attendees_array, @event_id)
+
           email_game_on = GameStarter::MandrillEmail.new
           email_game_on.send_game_on(@new_attendees_array, @event_id, @event_name)
 
