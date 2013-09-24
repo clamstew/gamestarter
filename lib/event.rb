@@ -113,6 +113,9 @@ module GameStarter
       @attending = true
     end
 
+    # Grab event data from Firebase.
+    # id is a string argument that represents the location of the event needed.
+    # Returns response_body, a json object.
     def get_event_from_firebase(id)
       # id = "-J41ONHpHKmFRknPIpIP"
       response = Unirest::get("https://gamestarter.firebaseio.com/events/#{id}.json",
