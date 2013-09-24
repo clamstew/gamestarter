@@ -2,45 +2,47 @@
 
 <h3>Create New Event</h3>
 
+<div id="new-event-form-response"></div>
+
 <form id="new-event-form" action="/add_event" method="post">
 
-	<label for="event_name">Event Name</label>
-	<input name="event_name" type="text" placeholder="Describe your event in a short title ... " />
+	<label for="event_name">Event Name <span class="red super">*</span></label>
+	<input name="event_name" id="event_name" type="text" placeholder="Describe your event in a short title ... " />
 
 	<div class="row">
 		<div class="large-4 columns">
-			<label for="creator_name">Creator Name: (Your full name)</label>
-			<input name="creator_name" type="text" placeholder="Type your name" />
+			<label for="creator_name">Creator Name: (Your full name) <span class="red super">*</span></label>
+			<input name="creator_name" id="creator_name" type="text" placeholder="Type your name" />
 		</div>
 		<div class="large-4 columns">
-			<label for="creator_email">Creator Email:</label>
-			<input name="creator_email" type="text" placeholder="e.g. alice@example.com" />
+			<label for="creator_email">Creator Email: <span class="red super">*</span></label>
+			<input name="creator_email" id="creator_email" type="email" placeholder="e.g. alice@example.com" />
 		</div>
 		<div class="large-4 columns">
-			<label for="creator_phone">Creator Phone:</label>
-			<input name="creator_phone" type="text" placeholder="e.g. (512)-555-5555" />
+			<label for="creator_phone">Creator Phone: <span class="red super">*</span></label>
+			<input name="creator_phone" id="creator_phone" type="phone" placeholder="e.g. (512)-555-5555" />
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="large-4 columns">
-			<label for="event_location">Event Location:</label>
-			<input name="event_location" type="text" placeholder="(e.g. 716 Congress Ave, Austin, TX 78712)" />
+			<label for="event_location">Event Location: <span class="red super">*</span></label>
+			<input name="event_location" id="event_location" type="text" placeholder="(e.g. 716 Congress Ave, Austin, TX 78712)" />
 		</div>
 		<div class="large-4 columns">
-			<label for="event_time">Event Time:</label>
-			<input name="event_time" type="text" placeholder="(e.g. 10am August 24, 2013)" />
+			<label for="event_time">Event Time: <span class="red super">*</span></label>
+			<input name="event_time" id="event_time" type="text" placeholder="(e.g. 10am August 24, 2013)" />
 		</div>
 		<div class="large-4 columns">
-			<label for="deadline">When is the deadline for signup:</label>
-			<input name="event_time" type="text" placeholder="(e.g. 10am August 24, 2013)" />
+			<label for="deadline">When is the deadline for signup: <span class="red super">*</span></label>
+			<input name="deadline" id="deadline" type="text" placeholder="(e.g. 10am August 24, 2013)" />
 		</div>
 	</div>
 	
 	<div class="row">
 		<div class="large-6 columns">
-			<label for="minimum-attendees">Minimum number of attendees:</label>
-			<input type="number" name="minimum_attendees" value="3" /> 
+			<label for="minimum-attendees">Minimum number of attendees: <span class="red super">*</span></label>
+			<input type="number" name="minimum_attendees" id="minimum_attendees" value="3" /> 
 		</div>
 		<div class="large-6 columns">
 			<label for="maximum-attendees">Maximum number of attendees:</label>
@@ -48,8 +50,8 @@
 		</div>
 	</div>
 
-	<label for="invitees">Attendees Emails (please separate with "," commas):</label>
-	<textarea name="invitees" placeholder="Please comma seperate. (e.g. bill@example.org, alice@example.com, greg@something.org, ...)"></textarea>
+	<label for="invitees">Attendees Emails (please separate with "," commas): <span class="red super">*</span></label>
+	<textarea name="invitees" id="invitees" placeholder="Please comma seperate. (e.g. alice@example.com, bill@example.org, greg@something.org, ...)"></textarea>
 
 	
 

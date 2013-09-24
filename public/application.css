@@ -9,11 +9,39 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 0;
 /*	line-height: 0;*/
 }
+input[type="phone"] {
+	background-color: 
+	#fff;
+	font-family: inherit;
+	border: 1px solid 
+	#ccc;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+	color: 
+	rgba(0,0,0,0.75);
+	display: block;
+	font-size: 0.875em;
+	margin: 0 0 1em 0;
+	padding: 0.5em;
+	height: 2.3125em;
+	width: 100%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: -webkit-box-shadow 0.45s,border-color 0.45s ease-in-out;
+	-moz-transition: -moz-box-shadow 0.45s,border-color 0.45s ease-in-out;
+	transition: box-shadow 0.45s,border-color 0.45s ease-in-out;
+}
 
-/*h3#big-icon {
-	font-size: 10em;
-	text-decoration: underline;
-}*/
+input[type="phone"]:focus {
+    -webkit-box-shadow: 0 0 5px #999999;
+    -moz-box-shadow: 0 0 5px #999999;
+    box-shadow: 0 0 5px #999999;
+    border-color: #999999;
+    background: #fafafa;
+    border-color: #999999;
+    outline: none; 
+}
 
 h3#main-logo {
 	font-size: 5em;
@@ -26,6 +54,11 @@ h3#main-logo .red {
 
 div.grey-box {
 	background: #cccccc;
+}
+
+label .red.super {
+	color: red;
+	vertical-align: super;
 }
 
 /*----- top nav -----*/
@@ -75,5 +108,19 @@ input[type=submit].large.success.button.pink {
 footer {
 	margin-bottom: 20px;
 	text-align: center;
+}
+
+/*--- New form page ---*/
+
+#new-event-form-response {
+	display: none;
+}
+.form-error {
+	border: 1px solid red;
+	background: #EEB4B4;
+}
+.form-error p {
+	padding: 10px;
+	margin-bottom: 0px;
 }
 
