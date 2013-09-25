@@ -108,6 +108,10 @@ post '/im_in' do
     { "Accept" => "application/json" }, new_attendees_array.to_json)
     @counter_of_attendees = 1
 
+    # NOTE - there is no email logic here for 1 person. 
+    # we could add some javascript - to warn a person if they put in 1 as min or max
+    
+
   # if attendees in this firebase event has 1 or more emails in it
   elsif @attendees.raw_body != "null"
       @attendees_id = @attendees.body
@@ -141,15 +145,18 @@ post '/im_in' do
 
           email_game_on = GameStarter::MandrillEmail.new
           email_game_on.send_game_on(@new_attendees_array, @event_id, @event_name)
+          @full = false
 
         elsif @counter_of_attendees > @minimum_attendees && @counter_of_attendees <= @maximum_attendees
 
           email_game_on = GameStarter::MandrillEmail.new
           email_game_on.send_game_already_on(@attendee_email, @event_id, @event_name)
+          @full = false
         
         else @counter_of_attendees > @maximum_attendees
           email_game_full = GameStarter::MandrillEmail.new
           email_game_full.send_game_rejection(@attendee_email, @event_id, @event_name)
+          @full = true
 
         end
 
@@ -168,15 +175,18 @@ post '/im_in' do
           # email_game_on.send_game_on(@new_attendees_array, @event_id)
           email_game_on = GameStarter::MandrillEmail.new
           email_game_on.send_game_on(@new_attendees_array, @event_id, @event_name)
+          @full = false
 
         elsif @counter_of_attendees > @minimum_attendees && @counter_of_attendees <= @maximum_attendees
 
           email_game_on = GameStarter::MandrillEmail.new
           email_game_on.send_game_already_on(@attendee_email, @event_id, @event_name)
+          @full = false
         
         else @counter_of_attendees > @maximum_attendees
           email_game_full = GameStarter::MandrillEmail.new
           email_game_full.send_game_rejection(@attendee_email, @event_id, @event_name)
+          @full = true
 
         end
       end
