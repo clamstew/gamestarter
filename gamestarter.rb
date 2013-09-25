@@ -168,6 +168,7 @@ post '/im_in' do
         response = Unirest::put("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
         { "Accept" => "application/json" }, @new_attendees_array.to_json)
 
+        # Sends if counter is equal to min
         if @counter_of_attendees == @minimum_attendees
           # send email to all attendees 
           # Send an email
