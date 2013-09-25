@@ -136,22 +136,22 @@ post '/im_in' do
         { "Accept" => "application/json" }, @new_attendees_array.to_json)
 
         # ======== IF MIN NUMBER IS 2 --- THEN EMAIL LOGIC ALSO NEEDS TO GO HERE
-        #     EMAIL LOGIC
-        # if @counter_of_attendees == @minimum_attendees
+            # EMAIL LOGIC
+        if @counter_of_attendees == @minimum_attendees
 
-        #   email_game_on = GameStarter::MandrillEmail.new
-        #   email_game_on.send_game_on(@new_attendees_array, @event_id, @event_name)
+          email_game_on = GameStarter::MandrillEmail.new
+          email_game_on.send_game_on(@new_attendees_array, @event_id, @event_name)
 
-        # elsif @counter_of_attendees > @minimum_attendees && @counter_of_attendees <= @maximum_attendees
+        elsif @counter_of_attendees > @minimum_attendees && @counter_of_attendees <= @maximum_attendees
 
-        #   email_game_on = GameStarter::MandrillEmail.new
-        #   email_game_on.send_game_already_on(@attendee_email, @event_id, @event_name)
+          email_game_on = GameStarter::MandrillEmail.new
+          email_game_on.send_game_already_on(@attendee_email, @event_id, @event_name)
         
-        # else @counter_of_attendees > @maximum_attendees
-        #   email_game_full = GameStarter::MandrillEmail.new
-        #   email_game_full.send_game_rejection(@attendee_email, @event_id, @event_name)
+        else @counter_of_attendees > @maximum_attendees
+          email_game_full = GameStarter::MandrillEmail.new
+          email_game_full.send_game_rejection(@attendee_email, @event_id, @event_name)
 
-        # end
+        end
 
       # if attendees in this firebase event has GREATER THAN 1 email in it  
       # it will appear as an array and you can do array pushes on it
