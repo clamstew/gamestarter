@@ -11,33 +11,31 @@
 		<h4><%= @invitee_email %> are you in?</h4>
 	</div>
 </div>
-<h2>Event ID: <%= @event_id %></h2>
+		<!-- <h2>Event ID: <%= @event_id %></h2>
 
-<h2>Result code: <%= @code %></h2>
+		<h2>Result code: <%= @code %></h2>
 
-<h2>Email: <%= @invitee_email %></h2>
-
-<pre>
-	<%= @result %>
-</pre>
-
+		<h2>Email: <%= @invitee_email %></h2>
+	
+		<pre>
+			<%= @result %>
+		</pre>
+	 -->
 <div class="grey-box">
-
-	<strong>Creator:</strong> <%= @result['creator']['name'] %>
-	<br/>
 	<strong>Event Name:</strong> <%= @result['event_name'] %>
 	<br/>
-	<strong>Event Time:</strong> <%= @result['time'] %>
-	<br/>
-	<strong>Deadline:</strong> <%= @result['deadline'] %>
-	<br/>
+	<strong>Event Time:</strong> <%= @result['time'] %>	
+	<br />
 	<strong>Event Location:</strong> <%= @result['location'] %>
-	<br/>
-	<strong>Minimum Attendees:</strong> <%= @result['minimum'] %>
-	<br/>
-	<strong>Maximum Attendees:</strong> <%= @result['maximum'] %>
-	<br/>
+	<br />
+	<strong>Deadline:</strong> <%= @result['deadline'] %>
+	<br />
 	<strong>Invitees:</strong> <% @result['attendees'] %>
-	
+	<br />
+	<strong>Minimum Attendees:</strong> <%= @result['minimum'] %>
+	<br />
+	<strong>Maximum Attendees:</strong> <%= @result['maximum'] %>
+	<br />
+	<strong>Creator:</strong> <%= @result['creator']['name'] %>	
 </div>
 

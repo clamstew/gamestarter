@@ -51,7 +51,7 @@ post '/add_event' do
 
   # Send an email to invitees
   email = GameStarter::MandrillEmail.new()
-  email.send_are_you_in(new_event.invitees, @event_id.to_s)
+  email.send_are_you_in(new_event.invitees, @event_id.to_s, @event_name)
 
   # Send email to event creator
   email2 = GameStarter::MandrillEmail.new()
@@ -110,7 +110,7 @@ post '/im_in' do
 
     # NOTE - there is no email logic here for 1 person. 
     # we could add some javascript - to warn a person if they put in 1 as min or max
-    
+
 
   # if attendees in this firebase event has 1 or more emails in it
   elsif @attendees.raw_body != "null"

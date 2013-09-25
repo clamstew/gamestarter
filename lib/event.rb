@@ -222,7 +222,7 @@ module GameStarter
     # Sends initial invite to potential attendees
     #
     #
-    def send_are_you_in(emails, event_id)
+    def send_are_you_in(emails, event_id, event_name)
       mandrill_to_array = []
       mandrill_mergevars_array =[]
       emails.each do |email|
@@ -257,7 +257,7 @@ module GameStarter
        :from_name=> "GameStarter <noreply@eventstarter.co>",  
        :text=>"You have a new gamestarter event. Are you in?",  
        :to=> mandrill_to_array,  
-       :html=>"<html><h1>Hi <strong>message</strong>, are you in?</h1><p>Yes, <a href=" + '"*|REPLYURL|*"' + ">I'm in!</a></p></html>",  
+       :html=>"<html><h1>Hey!, You have a new GameStarter Event.</h1><h1>Event Name: #{event_name}<p>Yes, <a href=" + '"*|REPLYURL|*"' + ">I'm in!</a></p></html>",  
        :from_email=>"sender@gamestarter.herokuapp.com"  
       }  
       sending = m.messages.send message  
@@ -362,7 +362,7 @@ module GameStarter
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h1>GameStarter Event Created and Sent</h1><p>#{event_name}</p><p>See Event coming soon.</p></html>",  
+       :html=>"<html><h1>GameStarter Event Created and Sent</h1><p>Event Name: #{event_name}</p><p>See Event coming soon(put in details).</p></html>",  
        :from_email=>"sender@gamestarter.herokuapp.com"  
       }  
       sending = m.messages.send message  
