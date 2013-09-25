@@ -125,6 +125,7 @@ post '/im_in' do
         end
         @counter_of_attendees = i
         # @TODO: put a pry thing here and see what i equals
+        @counter_at_this_point = @counter_of_attendees
 
         @new_attendees_array = @attendees_id[@first_key] = @attendees_id[@first_key] + ", #{@attendee_email}" 
         @new_attendees_array = @new_attendees_array.split(',')

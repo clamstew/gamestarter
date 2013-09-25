@@ -15,7 +15,6 @@ GEM
     diff-lcs (1.2.4)
     eventmachine (1.0.3)
     excon (0.25.3)
-    geocoder (1.1.8)
     gmail (0.4.0)
       gmail_xoauth (>= 0.3.0)
       mail (>= 2.2.1)
@@ -84,7 +83,6 @@ PLATFORMS
 
 DEPENDENCIES
   debugger
-  geocoder
   gmail
   json
   mandrill-api
