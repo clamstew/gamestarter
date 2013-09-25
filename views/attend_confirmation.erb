@@ -1,13 +1,19 @@
+<% if @full == false %>
 
 
-<p>YOU'RE IN!</p>
+	<p>YOU'RE IN!</p>
 
-<% # @new_attendees_array.inspect %>
-<br />
-<%# @new_attendees_array.inspect %>
-<br />
-<br />
-<p>Number of People Attending: <%= @counter_of_attendees %></p>
-<br />
-<br />
-<br />
+	<% # @new_attendees_array.inspect %>
+	<br />
+	<%# @new_attendees_array.inspect %>
+	<br />
+	<br />
+	<p>Number of People Attending: <%= @counter_of_attendees %></p>
+	<br />
+	<br />
+	<br />
+<% else %>
+
+<p> Event is Full! Maximum number has been reached. </p>
+
+<% end %>
