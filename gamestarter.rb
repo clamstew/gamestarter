@@ -123,7 +123,7 @@ post '/im_in' do
           end
           i += 1
         end
-        @counter_of_attendees = i
+        @counter_of_attendees = 2 #changed from i to 2
         # @TODO: put a pry thing here and see what i equals
         @counter_at_this_point = @counter_of_attendees
 
