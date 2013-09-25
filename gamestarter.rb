@@ -107,6 +107,7 @@ post '/im_in' do
     response = Unirest::post("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
     { "Accept" => "application/json" }, new_attendees_array.to_json)
     @counter_of_attendees = 1
+    @full = false
 
     # NOTE - there is no email logic here for 1 person. 
     # we could add some javascript - to warn a person if they put in 1 as min or max
