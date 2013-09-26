@@ -18,6 +18,10 @@ get '/' do
   erb :index
 end
 
+get '/api_key' do
+  "This is a key #{ENV['MANDRILL_APIKEY']}."
+end
+
 get '/about' do
   
   erb :about

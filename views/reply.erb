@@ -1,19 +1,29 @@
 <% # If number of attendees + 1 is kess than or equal to the maixmum number of attendees  %>
-<div class="row">
-	<div class="large-2 columns">
-		<form action="/im_in" method="post">
-			<input type="hidden" name="invitee_email" value="<%= @invitee_email %>" />
-			<input type="hidden" name="event_id" value="<%= @event_id %>" />
-			<input type="submit" class="button" value="I'm in!" data-email="<%= @invitee_email %>" data-event="<%= @event_id %>">
-		</form>
-	</div>
-	<div class="large-10 columns">
-		<strong>Event Name:</strong> <%= @result['event_name'] %>
-		<h4><%= @invitee_email %> are you in?</h4>
-	</div>
-</div>
-<% # Else if the event is full %>
+<% if @attendees.count + 1 <= @maximum_attendees  %>
 
+	<div class="row">
+		<div class="large-2 columns">
+			<form action="/im_in" method="post">
+				<input type="hidden" name="invitee_email" value="<%= @invitee_email %>" />
+				<input type="hidden" name="event_id" value="<%= @event_id %>" />
+				<input type="submit" class="button" value="I'm in!" data-email="<%= @invitee_email %>" data-event="<%= @event_id %>">
+			</form>
+		</div>
+		<div class="large-10 columns">
+			<strong>Event Name:</strong> <%= @result['event_name'] %>
+			<h4><%= @invitee_email %> are you in?</h4>
+		</div>
+	</div>
+	
+<% elsif @attendees.count + 1 > @maximum_attendees %>
+
+	<div class="row">
+		<div class="large-10 columns">
+			<strong>Sorry <%= @invitee_email %>, this event is full.</strong>
+		</div>
+	</div>
+
+<% end %>
 
 <div class="grey-box">
 	<strong>Event Name:</strong> <%= @result['event_name'] %>
