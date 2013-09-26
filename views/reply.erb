@@ -1,4 +1,4 @@
-<% if @attendees.count <= @result['maximum'] || @attendees.length <= @result['maximum'] || @attendees == nil %>
+<% if @attendees.class == NilClass && @attendees.nil? || @attendees.class == Hash && @attendees.length < @result['maximum'] || @attendees.class == Array && @attendees.count < @result['maximum'] %>
 
 	<div class="row">
 		<div class="large-2 columns">
