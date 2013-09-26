@@ -9,13 +9,14 @@ require 'mandrill'
 module GameStarter
   
   class Event 
-    attr_accessor :creator, :event_time, :deadline, :event_name, :event_location, :attendees, :minimum_attendees, :maximum_attendees, :invitees
+    attr_accessor :creator, :event_time, :deadline, :event_name, :event_description, :event_location, :attendees, :minimum_attendees, :maximum_attendees, :invitees
     
-    def initialize (event_time, deadline, event_name, event_location, minimum_attendees, maximum_attendees, creator_name, phone, email, invitees)
+    def initialize (event_time, deadline, event_name, event_description, event_location, minimum_attendees, maximum_attendees, creator_name, phone, email, invitees)
       @creator = GameStarter::Creator.new(creator_name, phone, email)
       @event_time = event_time
       @deadline = deadline
       @event_name = event_name
+      @event_description = event_description
       @event_location = event_location
       @attendees = [] # this will be num attendees with .count
       @minimum_attendees = minimum_attendees
@@ -41,7 +42,8 @@ module GameStarter
         },
         time: @event_time,
         deadline: @deadline, 
-        event_name: @event_name, 
+        event_name: @event_name,
+        event_description: @event_description, 
         location: @event_location, 
         attendees: [], #@attendees,
         minimum: @minimum_attendees.to_i, 
