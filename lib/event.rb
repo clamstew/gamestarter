@@ -157,7 +157,6 @@ module GameStarter
         }
         mandrill_mergevars_array.push(this_merge_vars)
       end
-      ENV['MANDRILL_APIKEY'] = 'IoiZR9Tv9PuIjcV2-fMV7A'
 
       m = Mandrill::API.new
       message = {  
