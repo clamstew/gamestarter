@@ -1,3 +1,4 @@
+<% # If number of attendees + 1 is kess than or equal to the maixmum number of attendees  %>
 <div class="row">
 	<div class="large-2 columns">
 		<form action="/im_in" method="post">
@@ -11,16 +12,9 @@
 		<h4><%= @invitee_email %> are you in?</h4>
 	</div>
 </div>
-		<!-- <h2>Event ID: <%= @event_id %></h2>
+<% # Else if the event is full %>
 
-		<h2>Result code: <%= @code %></h2>
 
-		<h2>Email: <%= @invitee_email %></h2>
-	
-		<pre>
-			<%= @result %>
-		</pre>
-	 -->
 <div class="grey-box">
 	<strong>Event Name:</strong> <%= @result['event_name'] %>
 	<br/>
