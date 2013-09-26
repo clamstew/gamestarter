@@ -5,9 +5,15 @@
 <div id="new-event-form-response"></div>
 
 <form id="new-event-form" action="/add_event" method="post">
-
-	<label for="event_name">Event Name <span class="red super">*</span></label>
-	<input name="event_name" id="event_name" type="text" placeholder="Describe your event in a short title ... " />
+	
+	<div class="row">
+		<div class="large-12 columns">
+			<label for="event_name">Event Name <span class="red super">*</span></label>
+			<input name="event_name" id="event_name" type="text" placeholder="Event Title" />
+			<label for="event_description">Event Description</label>
+			<input name="event_description" id="event_description" type="text" placeholder="Optional: Describe your event with a description or insert notes." />
+		</div>
+	</div>
 
 	<div class="row">
 		<div class="large-4 columns">
