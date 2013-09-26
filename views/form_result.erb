@@ -10,10 +10,10 @@
 	<br/>
 	<strong>Event Name:</strong> <%= @event_name %>
 	<br/>
-	<% if @event_description != "" %>
-	<strong>Event Description:</strong> <%= @event_description %>
+	<% if @event_description.length > 0 %>
+		<strong>Event Description:</strong> <%= @event_description %>
+		<br />
 	<% end %>
-	<br />
 	<strong>Event Time:</strong> <%= @event_time %>
 	<br/>
 	<strong>Deadline:</strong> <%= @deadline %>
@@ -22,10 +22,10 @@
 	<br/>
 	<strong>Minimum Attendees:</strong> <%= @minimum_attendees %>
 	<br/>
-	<% if @maximum_attendees != "" %>
-	<strong>Maximum Attendees:</strong> <%= @maximum_attendees %>
+	<% if @maximum_attendees.length > 0 %>
+		<strong>Maximum Attendees:</strong> <%= @maximum_attendees %>
+		<br/>
 	<% end %>
-	<br/>
 	<strong>Invitees:</strong> <%= @invitees %>
 	
 </div>
