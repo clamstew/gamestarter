@@ -9,6 +9,9 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 0;
 /*	line-height: 0;*/
 }
+
+
+/* ======= OVERRIDE THE LACK OF DEFAULT FOR PHONE IN FOUNDATION ========= */
 input[type="phone"] {
 	background-color: 
 	#fff;
@@ -59,6 +62,9 @@ div.grey-box {
 label .red.super {
 	color: red;
 	vertical-align: super;
+}
+.center {
+	text-align: center;
 }
 
 /*----- top nav -----*/
@@ -124,3 +130,17 @@ footer {
 	margin-bottom: 0px;
 }
 
+
+/*==== Create Form h3 override ===*/
+
+h3.teal {
+	color: #2ba6cb;
+}
+
+/* ---- about us page  ----*/
+
+.profile-pic {
+	-webkit-border-radius: 300px;
+	border-radius: 300px;
+
+}

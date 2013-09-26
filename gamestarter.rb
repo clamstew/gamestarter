@@ -18,6 +18,11 @@ get '/' do
   erb :index
 end
 
+get '/about' do
+  
+  erb :about
+end
+
 # # get '/event' do
 # #   example_event = GameStarter::Event.new(time, deadline, event_name, event_location, attendees, minimum, maximum, creator_name, phone, email)
 # #   example_event.inspect
