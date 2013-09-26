@@ -132,3 +132,13 @@ $(document).on('submit','#new-event-form', function(e){
 	
 	return;
 });
+
+// Throws a warning alert if this detects more than 600 characters
+// in the email address box. 
+// @TODO: put more front end validation logic here to begin to make sure it is more difficult to submit more than 30 email addresses. 
+// 
+$(document).on('keypress','#new-event-form #invitees', function(e){
+	if ($(this).val().length > 600) {
+		alert("Too many email addresses entered! Please include less than 30.");
+	}
+});
