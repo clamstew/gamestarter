@@ -151,7 +151,7 @@ module GameStarter
             }, 
             {
               "name"=> "replyurl",
-              "content"=> "http://gamestarter.herokuapp.com/reply/#{event_id}/#{email_url_encode.strip()}"
+              "content"=> "http://www.eventstarter.co/reply/#{event_id}/#{email_url_encode.strip()}"
             }
           ]
         }
@@ -169,7 +169,7 @@ module GameStarter
        :to=> mandrill_to_array,  
        
        :html=>"<html><h2>Event Name: #{event_name}<p>Yes, <a href=" + '"*|REPLYURL|*"' + ">I'm in!</a></p></h2></html>",  
-       :from_email=>"sender@gamestarter.herokuapp.com"  
+       :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
       sending
@@ -188,21 +188,6 @@ module GameStarter
           :name => ""
         }
         mandrill_to_array.push(this_to_object)
-
-        # this_merge_vars = {
-        #   :rcpt => "#{email}",
-        #   :vars => [
-        #     {
-        #       "name"=> "urlemail",
-        #       "content"=> "#{email}"
-        #     }, 
-        #     {
-        #       "name"=> "replyurl",
-        #       "content"=> "http://gamestarter.herokuapp.com/reply/#{event_id}/#{email_url_encode.strip()}"
-        #     }
-        #   ]
-        # }
-        # mandrill_mergevars_array.push(this_merge_vars)
       end
 
       m = Mandrill::API.new
@@ -211,10 +196,10 @@ module GameStarter
        # :merge => true,
        :subject=> "Game On: #{event_name}",  
        :from_name=> "EventStarter <noreply@eventstarter.co>",  
-       :text=>"Your Eventstarter event #{event_name} is on.  Please, plan on attending, since you are 'in'.",  
+       :text=>"Your EventStarter event #{event_name} is on.  Please, plan on attending, since you are 'in'.",  
        :to=> mandrill_to_array,  
        :html=>"<html><h2>Your EventStarter event #{event_name} is on!</h2><p>Please, plan on attending, since you are 'in'.</p></html>",  
-       :from_email=>"sender@gamestarter.herokuapp.com"  
+       :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
       sending
@@ -233,7 +218,7 @@ module GameStarter
           :name => ""
         }],  
        :html=>"<html><h2>Your EventStarter event '#{event_name}' is now on.</h2><p>#{event_name}</p><p>The minimum number has been met for this event, but the max has not yet been met.</p></html>",  
-       :from_email=>"sender@gamestarter.herokuapp.com"  
+       :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
       sending
@@ -254,7 +239,7 @@ module GameStarter
           :name => ""
         }],  
        :html=>"<html><h2>Your EventStarter event #{event_name} is FULL.</h2><p>#{event_name}</p><p>The maximum number has been met for this event. Sorry, we hope to catch you next time.</p></html>",  
-       :from_email=>"sender@gamestarter.herokuapp.com"  
+       :from_email=>"sender@eventstarter.com"  
       }  
       sending = m.messages.send message  
       sending
@@ -267,14 +252,14 @@ module GameStarter
       m = Mandrill::API.new
       message = {   
        :subject=> "Event Created and Sent on EventStarter",  
-       :from_name=> "GameStarter <noreply@eventstarter.co>",  
+       :from_name=> "EventStarter <noreply@eventstarter.co>",  
        :text=>"You created a new EventStarter event, and you send out emails to your list. Details attached: ...",  
        :to=> [{
           :email => "#{email}",
           :name => ""
         }],  
        :html=>"<html><h2>EventStarter Event Created and Sent</h2><p>Event Name: #{event_name}</p><p>See Event coming soon(put in details).</p></html>",  
-       :from_email=>"sender@gamestarter.herokuapp.com"  
+       :from_email=>"sender@eventstarter.com"  
       }  
       sending = m.messages.send message  
       sending
