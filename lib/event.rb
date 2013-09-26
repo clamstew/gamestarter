@@ -135,7 +135,7 @@ module GameStarter
       mandrill_to_array = []
       mandrill_mergevars_array =[]
       emails.each do |email|
-        email_url_encode = email.gsub("@", "%40")
+        email_url_encode = email.gsub("@", "%40").gsub(".", "%2E")
         this_to_object = {
           :email => "#{email}",
           :name => ""
