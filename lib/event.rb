@@ -253,7 +253,7 @@ module GameStarter
       message = {  
        :merge_vars => mandrill_mergevars_array,
        :merge => true,
-       :preserve_recipients=> true,
+       :preserve_recipients=> false,
        :subject=> "New Event on GameStarter",  
        :from_name=> "GameStarter <noreply@eventstarter.co>",  
        :text=>"You have a new gamestarter event. Are you in?",  
