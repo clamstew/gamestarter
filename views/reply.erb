@@ -1,5 +1,4 @@
-<% # If number of attendees + 1 is kess than or equal to the maixmum number of attendees  %>
-<% if (@counter_of_attendees.to_i + 1) <= @maximum_attendees.to_i  %>
+<% if @attendees.count <= @result['maximum'] || @attendees.length <= @result['maximum'] || @attendees == nil %>
 
 	<div class="row">
 		<div class="large-2 columns">
@@ -15,11 +14,11 @@
 		</div>
 	</div>
 	
-<% elsif (@counter_of_attendees.to_i + 1) > @maximum_attendees.to_i %>
+<% else %>
 
 	<div class="row">
 		<div class="large-10 columns">
-			<strong>Sorry <%= @invitee_email %>, this event is full.</strong>
+			<h3>Sorry <%= @invitee_email %>, this event is full.</h3>
 		</div>
 	</div>
 
@@ -34,7 +33,7 @@
 	<br />
 	<strong>Deadline:</strong> <%= @result['deadline'] %>
 	<br />
-	<strong>Invitees:</strong> <% @result['attendees'] %>
+	<strong>Invitees:</strong> <% @result['attendees'].inspect %>
 	<br />
 	<strong>Minimum Attendees:</strong> <%= @result['minimum'] %>
 	<br />

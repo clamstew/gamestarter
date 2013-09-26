@@ -75,8 +75,9 @@ get '/reply/:event_id/:invitee_email' do
   @invitee_email = params[:invitee_email]
   attendee = GameStarter::Attendee.new(params[:invitee_email])
   @result = attendee.get_event_from_firebase(params[:event_id]) # Test this with a mock object
-  # @result = JSON.load(@result)
-  # @code = result.code
+
+  @attendees = @result['attendees'] # used for if then logic to keep people from joining full events
+
   erb :reply 
 end
 
