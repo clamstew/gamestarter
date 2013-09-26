@@ -57,6 +57,11 @@ h3#main-logo .red {
 
 div.grey-box {
 	background: #cccccc;
+	padding: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	width: 400px;
+	line-height: 2em;
 }
 
 label .red.super {
