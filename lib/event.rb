@@ -192,8 +192,7 @@ module GameStarter
 
       m = Mandrill::API.new
       message = {  
-       # :merge_vars => mandrill_mergevars_array,
-       # :merge => true,
+       :preserve_recipients=> false,
        :subject=> "Game On: #{event_name}",  
        :from_name=> "EventStarter <noreply@eventstarter.co>",  
        :text=>"Your EventStarter event #{event_name} is on.  Please, plan on attending, since you are 'in'.",  
