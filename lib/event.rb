@@ -127,97 +127,6 @@ module GameStarter
 
   end
 
-  class Email
-    @@username = ENV['GMAILUSER']
-    @@password = ENV['GMAILPSWD']
-
-    def send(emails, event_id)
-      gmail = Gmail.connect(@@username, @@password)
-      emails.each do |recipient|
-        reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient.strip()}"
-        gmail.deliver do
-        # email = gmail.compose do
-          text_part do
-            body "Game Starter. Go to this address in your webaddress: #{reply_url}"
-          end
-          html_part do
-            content_type 'text/html; charset=UTF-8'
-            body "<h3>Game Starter</h3><p>Are you attending: <a href=" + reply_url + ">I'm In</a></p>"
-            # body "<p>Text of <em>html</em> message.</p>"
-          end
-          to recipient.strip()
-          subject "You've Got a New Event!"
-          # body body
-        end
-        
-      end
-      gmail.logout
-    end
-    
-    def send_game_on(emails, event_id)
-      gmail = Gmail.connect(@@username, @@password)
-      emails.each do |recipient|
-        reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient.strip()}"
-        gmail.deliver do
-        # email = gmail.compose do
-          text_part do
-            body "Game on for this game: ______"
-          end
-          html_part do
-            content_type 'text/html; charset=UTF-8'
-            body "<h3>Game Starter</h3><h3>Game Is On</h3><p>You are In.</p>"
-            # body "<p>Text of <em>html</em> message.</p>"
-          end
-          to recipient.strip()
-          subject "Game On! | game > starter"
-          # body body
-        end
-        
-      end
-      gmail.logout
-    end
-
-    def send_game_already_on(email, event_id)
-      gmail = Gmail.connect(@@username, @@password)
-      reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient.strip()}"
-      gmail.deliver do
-      # email = gmail.compose do
-        text_part do
-          body "Game on for this game: ______"
-        end
-        html_part do
-          content_type 'text/html; charset=UTF-8'
-          body "<h3>Game Starter</h3><h3>Game Is On</h3><p>You are In.</p>"
-          # body "<p>Text of <em>html</em> message.</p>"
-        end
-        to email.strip()
-        subject "Game On! | game > starter"
-        # body body
-      end
-      gmail.logout
-    end
-
-    def send_game_rejection(email, event_id)
-      gmail = Gmail.connect(@@username, @@password)
-      reply_url = "http://gamestarter.herokuapp.com/reply/#{event_id}/#{recipient.strip()}"
-      gmail.deliver do
-      # email = gmail.compose do
-        text_part do
-          body "Game full there are too many people.  The maximum is reached."
-        end
-        html_part do
-          content_type 'text/html; charset=UTF-8'
-          body "<h3>Game Starter</h3><h3>Too many people have replied.</h3><p>Catch you next time.</p>"
-          # body "<p>Text of <em>html</em> message.</p>"
-        end
-        to email.strip()
-        subject "Game Full | game > starter"
-        # body body
-      end
-      gmail.logout
-    end
-  end
-
   class MandrillEmail
     # Sends initial invite to potential attendees
     #
@@ -242,7 +151,7 @@ module GameStarter
             }, 
             {
               "name"=> "replyurl",
-              "content"=> "http://gamestarter.herokuapp.com/reply/#{event_id}/#{email_url_encode.strip()}"
+              "content"=> "http://www.eventstarter.co/reply/#{event_id}/#{email_url_encode.strip()}"
             }
           ]
         }
@@ -254,13 +163,14 @@ module GameStarter
       message = {  
        :merge_vars => mandrill_mergevars_array,
        :merge => true,
-       :subject=> "New Event on GameStarter",  
-       :from_name=> "GameStarter <noreply@eventstarter.co>",  
-       :text=>"You have a new gamestarter event. Are you in?",  
+       :preserve_recipients=> false,
+       :subject=> "New Event on EventStarter",  
+       :from_name=> "EventStarter <noreply@eventstarter.co>",  
+       :text=>"You have a new EventStarter event. Are you in?",  
        :to=> mandrill_to_array,  
-       :preserve_recipients=> true,
+       
        :html=>"<html><h2>Event Name: #{event_name}<p>Yes, <a href=" + '"*|REPLYURL|*"' + ">I'm in!</a></p></h2></html>",  
-       :from_email=>"sender@gamestarter.herokuapp.com"  
+       :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
       sending
@@ -279,21 +189,6 @@ module GameStarter
           :name => ""
         }
         mandrill_to_array.push(this_to_object)
-
-        # this_merge_vars = {
-        #   :rcpt => "#{email}",
-        #   :vars => [
-        #     {
-        #       "name"=> "urlemail",
-        #       "content"=> "#{email}"
-        #     }, 
-        #     {
-        #       "name"=> "replyurl",
-        #       "content"=> "http://gamestarter.herokuapp.com/reply/#{event_id}/#{email_url_encode.strip()}"
-        #     }
-        #   ]
-        # }
-        # mandrill_mergevars_array.push(this_merge_vars)
       end
 
       m = Mandrill::API.new
@@ -301,11 +196,11 @@ module GameStarter
        # :merge_vars => mandrill_mergevars_array,
        # :merge => true,
        :subject=> "Game On: #{event_name}",  
-       :from_name=> "GameStarter <noreply@eventstarter.co>",  
-       :text=>"Your gamestarter event #{event_name} is on.  Please, plan on attending, since you are 'in'.",  
+       :from_name=> "EventStarter <noreply@eventstarter.co>",  
+       :text=>"Your EventStarter event #{event_name} is on.  Please, plan on attending, since you are 'in'.",  
        :to=> mandrill_to_array,  
-       :html=>"<html><h2>Your GameStarter event #{event_name} is on!</h2><p>Please, plan on attending, since you are 'in'.</p></html>",  
-       :from_email=>"sender@gamestarter.herokuapp.com"  
+       :html=>"<html><h2>Your EventStarter event #{event_name} is on!</h2><p>Please, plan on attending, since you are 'in'.</p></html>",  
+       :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
       sending
@@ -317,14 +212,14 @@ module GameStarter
       m = Mandrill::API.new
       message = {   
        :subject=> "Game On: #{event_name}",  
-       :from_name=> "GameStarter <noreply@eventstarter.co>",  
-       :text=>"Your GameStarter '#{event_name}' is now on. Please come out since you said your in on your RSVP.",  
+       :from_name=> "EventStarter <noreply@eventstarter.co>",  
+       :text=>"Your EventStarter '#{event_name}' is now on. Please come out since you said your in on your RSVP.",  
        :to=> [{
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>Your GameStarter event '#{event_name}' is now on.</h2><p>#{event_name}</p><p>The minimum number has been met for this event, but the max has not yet been met.</p></html>",  
-       :from_email=>"sender@gamestarter.herokuapp.com"  
+       :html=>"<html><h2>Your EventStarter event '#{event_name}' is now on.</h2><p>#{event_name}</p><p>The minimum number has been met for this event, but the max has not yet been met.</p></html>",  
+       :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
       sending
@@ -338,14 +233,14 @@ module GameStarter
       m = Mandrill::API.new
       message = {   
        :subject=> "Game FULL: #{event_name}",  
-       :from_name=> "GameStarter <noreply@eventstarter.co>",  
-       :text=>"Your GameStarter event #{event_name} is FULL, and the maximum number of attendees has been met. We hope to catch you next time.",  
+       :from_name=> "EventStarter <noreply@eventstarter.co>",  
+       :text=>"Your EventStarter event #{event_name} is FULL, and the maximum number of attendees has been met. We hope to catch you next time.",  
        :to=> [{
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>Your GameStarter event #{event_name} is FULL.</h2><p>#{event_name}</p><p>The maximum number has been met for this event. Sorry, we hope to catch you next time.</p></html>",  
-       :from_email=>"sender@gamestarter.herokuapp.com"  
+       :html=>"<html><h2>Your EventStarter event #{event_name} is FULL.</h2><p>#{event_name}</p><p>The maximum number has been met for this event. Sorry, we hope to catch you next time.</p></html>",  
+       :from_email=>"sender@eventstarter.com"  
       }  
       sending = m.messages.send message  
       sending
@@ -357,15 +252,15 @@ module GameStarter
     def send_event_create_confirmation(email, event_id, event_name)
       m = Mandrill::API.new
       message = {   
-       :subject=> "Event Created and Sent on Gamestarter",  
-       :from_name=> "GameStarter <noreply@eventstarter.co>",  
-       :text=>"You created a new gamestarter event, and you send out emails to your list. Details attached: ...",  
+       :subject=> "Event Created and Sent on EventStarter",  
+       :from_name=> "EventStarter <noreply@eventstarter.co>",  
+       :text=>"You created a new EventStarter event, and you send out emails to your list. Details attached: ...",  
        :to=> [{
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>GameStarter Event Created and Sent</h2><p>Event Name: #{event_name}</p><p>See Event coming soon(put in details).</p></html>",  
-       :from_email=>"sender@gamestarter.herokuapp.com"  
+       :html=>"<html><h2>EventStarter Event Created and Sent</h2><p>Event Name: #{event_name}</p><p>See Event coming soon(put in details).</p></html>",  
+       :from_email=>"sender@eventstarter.com"  
       }  
       sending = m.messages.send message  
       sending
