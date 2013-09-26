@@ -256,8 +256,8 @@ module GameStarter
        :subject=> "New Event on GameStarter",  
        :from_name=> "GameStarter <noreply@eventstarter.co>",  
        :text=>"You have a new gamestarter event. Are you in?",  
-       :to=>"GameStarter <noreply@eventstarter.co>",
-       :bcc_address=> mandrill_to_array,  
+       :to=> mandrill_to_array,  
+       :preserve_recipients=> true,
        :html=>"<html><h2>Event Name: #{event_name}<p>Yes, <a href=" + '"*|REPLYURL|*"' + ">I'm in!</a></p></h2></html>",  
        :from_email=>"sender@gamestarter.herokuapp.com"  
       }  
