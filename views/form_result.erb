@@ -10,7 +10,7 @@
 	<br/>
 	<strong>Event Name:</strong> <%= @event_name %>
 	<br/>
-	<% if @event_description.length > 0 %>
+	<% if @event_description.strip.length > 0 %>
 		<strong>Event Description:</strong> <%= @event_description %>
 		<br />
 	<% end %>
