@@ -13,8 +13,6 @@ require_relative 'lib/event'
 
 
 get '/' do
-
-  # 'hello world'
   erb :index
 end
 
@@ -89,6 +87,27 @@ post '/im_in' do
   @attendee_email = params[:invitee_email]
   @attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
   { "Accept" => "application/json" })
+
+  # need a method here to make sure the person is not in the array of RSVP'd attendees
+  @json_body = @attendees.body
+  if @json_body.class == Array
+    @json_body.inspect
+    if @json_body.to_a.include?(@attendee_email)
+      return erb :already_in
+    end
+  elsif @json_body.class == Hash
+    i = 0
+    @json_body.each do |x,y|
+      if i == 0
+        @first_value = y
+      end
+      i += 1
+    end
+    if @first_value == @attendee_email
+      return erb :already_in
+    end
+  end
+  # end part where it checks if you are already an attendee
 
   # Get the minimum number of attendees for this event
   @minimum_attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/minimum/.json",
