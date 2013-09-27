@@ -141,5 +141,6 @@ $(document).on('submit','#new-event-form', function(e){
 $(document).on('keypress','#new-event-form #invitees', function(e){
 	if ($(this).val().length > 600) {
 		alert("Too many email addresses entered! Please include less than 30.");
+		$('#new-event-form #submit').prop('disabled', true);
 	}
 });
