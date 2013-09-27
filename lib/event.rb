@@ -83,6 +83,23 @@ module GameStarter
         @invitees = invitees.split(',')
       end
 
+      # Check to see if the deadline for a given event has passed.
+      # If it has, return true.
+      # If not, return false.
+      # To be used in the cron job.
+      def has_deadline_passed?
+        if Time.now > @deadline return true
+        else return false
+      end
+
+      # Checks to see if the minimum number of people has been reached for a given event.
+      # If it has, return true.
+      # If not, return false.
+      # To be used in the cron job. Could also be used in email logic?
+      def is_minimum_reached?
+        if @attendees.count >= @minimum_attendees return true
+        else return false
+      end
   end
 
   class Creator
