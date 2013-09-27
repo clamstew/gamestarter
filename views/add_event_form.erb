@@ -1,8 +1,16 @@
 
 
-<h3 class="teal">Create New Event</h3>
 
-<div id="new-event-form-response"></div>
+<div class="row">
+	<div class="large-9 columns">
+		<h3 class="teal">Create New Event</h3>
+		
+		<div id="new-event-form-response"></div>
+	</div>
+	<div class="large-3 columns">
+		<div class="red margin-top-10-left-10">[* = Required Field]</div>
+	</div>
+</div>
 
 <form id="new-event-form" action="/add_event" method="post">
 	
@@ -58,12 +66,6 @@
 
 	<label for="invitees">Attendees Emails (please separate with "," commas): <span class="red super">*</span></label>
 	<textarea name="invitees" id="invitees" placeholder="Please comma seperate. (e.g. alice@example.com, bill@example.org, greg@something.org, ...)"></textarea>
-
-	
-
-	
-
-	
 
 	<input type="submit" id="submit" class="large success button pink" value="SEND" />
 </form>

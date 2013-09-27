@@ -10,6 +10,13 @@ h1, h2, h3, h4, h5, h6 {
 /*	line-height: 0;*/
 }
 
+.red {
+	color: red;
+}
+
+.margin-top-10-left-10 {
+	margin: 10px 0 0 17px; 
+}
 
 /* ======= OVERRIDE THE LACK OF DEFAULT FOR PHONE IN FOUNDATION ========= */
 input[type="phone"] {
