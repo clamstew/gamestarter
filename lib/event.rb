@@ -170,7 +170,7 @@ module GameStarter
        :text=>"You have a new EventStarter event. Are you in?",  
        :to=> mandrill_to_array,  
        
-       :html=>"<html><h2>Event Name: #{event_name}<p>Yes, <a href=" + '"*|REPLYURL|*"' + ">See event details and RSVP.</a></p></h2></html>",  
+       :html=>"<html><h2>Event Name: #{event_name}<p><a href=" + '"*|REPLYURL|*"' + ">RSVP and See Event Details.</a></p></h2></html>",  
        :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
