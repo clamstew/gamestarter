@@ -155,9 +155,11 @@ h3.teal {
 }
 
 /* ---- about us page  ----*/
-
+.profile-pic-wrap p {
+	text-align: center;
+}
 .profile-pic {
-	-webkit-border-radius: 300px;
-	border-radius: 300px;
+	-webkit-border-radius: 200px;
+	border-radius: 200px;
 
 }
