@@ -120,8 +120,9 @@ $(document).on('submit','#new-event-form', function(e){
 	
 	if (alertStatement.length === 0) {
 		// e.preventDefault();
-		$('#new-event-form-response').html('Form is good to go.').show();
-		console.log('in the form good to go condition');
+		// $('#new-event-form-response').html('Form is good to go.').show();
+		// console.log('in the form good to go condition');
+		$('#new-event-form #submit').prop('disabled', true);
 	} else {
 		e.preventDefault();
 		alertStatement = "<p><strong>The following fields cannot be empty: </strong>" + alertStatement + ".</p>";
