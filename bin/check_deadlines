@@ -1,1 +1,2 @@
-"task ran. woot!"
+#!/usr/bin/env ruby
+puts "task ran. woot!"
