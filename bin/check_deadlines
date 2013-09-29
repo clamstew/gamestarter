@@ -9,6 +9,6 @@ require 'unirest'
 require 'json'
 require 'mandrill'
 
-require_relative 'lib/event'
+require_relative '../lib/event'
 
 puts "task ran with all required things. woot!"
