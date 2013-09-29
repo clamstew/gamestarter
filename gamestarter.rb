@@ -99,6 +99,7 @@ post '/im_in' do
 
   @event_id = params[:event_id]
   @attendee_email = params[:invitee_email]
+  params = {}
   @attendees = Unirest::get("https://gamestarter.firebaseio.com/events/#{@event_id}/attendees/.json",
   { "Accept" => "application/json" })
 
@@ -189,18 +190,18 @@ post '/im_in' do
         if @counter_of_attendees == @minimum_attendees
 
           email_game_on = GameStarter::MandrillEmail.new
-          email_game_on.send_game_on(@new_attendees_array, @event_id, @event_name)
+          email_game_on.send_game_on(@new_attendees_array, @event_id, @event_name, params)
           @full = false
 
         elsif @counter_of_attendees > @minimum_attendees && @counter_of_attendees <= @maximum_attendees
 
           email_game_on = GameStarter::MandrillEmail.new
-          email_game_on.send_game_already_on(@attendee_email, @event_id, @event_name)
+          email_game_on.send_game_already_on(@attendee_email, @event_id, @event_name, params)
           @full = false
         
         else @counter_of_attendees > @maximum_attendees
           email_game_full = GameStarter::MandrillEmail.new
-          email_game_full.send_game_rejection(@attendee_email, @event_id, @event_name)
+          email_game_full.send_game_rejection(@attendee_email, @event_id, @event_name, params)
           @full = true
 
         end
@@ -220,18 +221,18 @@ post '/im_in' do
           # email_game_on = GameStarter::Email.new
           # email_game_on.send_game_on(@new_attendees_array, @event_id)
           email_game_on = GameStarter::MandrillEmail.new
-          email_game_on.send_game_on(@new_attendees_array, @event_id, @event_name)
+          email_game_on.send_game_on(@new_attendees_array, @event_id, @event_name, params)
           @full = false
 
         elsif @counter_of_attendees > @minimum_attendees && @counter_of_attendees <= @maximum_attendees
 
           email_game_on = GameStarter::MandrillEmail.new
-          email_game_on.send_game_already_on(@attendee_email, @event_id, @event_name)
+          email_game_on.send_game_already_on(@attendee_email, @event_id, @event_name, params)
           @full = false
         
         else @counter_of_attendees > @maximum_attendees
           email_game_full = GameStarter::MandrillEmail.new
-          email_game_full.send_game_rejection(@attendee_email, @event_id, @event_name)
+          email_game_full.send_game_rejection(@attendee_email, @event_id, @event_name, params)
           @full = true
 
         end
