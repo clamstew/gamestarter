@@ -133,7 +133,7 @@ module GameStarter
     # Sends initial invite to potential attendees
     #
     #
-    def send_are_you_in(emails, event_id, event_name)
+    def send_are_you_in(emails, event_id, event_name, params)
       mandrill_to_array = []
       mandrill_mergevars_array =[]
       emails.each do |email|
@@ -170,7 +170,7 @@ module GameStarter
        :text=>"You have a new EventStarter event. Are you in?",  
        :to=> mandrill_to_array,  
        
-       :html=>"<html><h2>Event Name: #{event_name}<p><a href=" + '"*|REPLYURL|*"' + ">RSVP and See Event Details.</a></p></h2></html>",  
+       :html=>"<html><h2>Event Name: #{event_name}<p><a href=" + '"*|REPLYURL|*"' + ">RSVP and See Event Details.</a></p></h2><p>Event Description: #{event_description}</p><p>Creator Name: #{creator_name}</p><p>Creator Phone: #{creator_phone}</p><p>Event Time: #{event_time}</p><p>Event Time: #{event_time}</p><p>Event Location: #{event_location}</p><p>Invitees: #{invitees}</p><p>Minimum Attendees: #{minimum_attendees}</p><p>Maximum Attendees: #{maximum_attendees}</p><p>Deadline: #{deadline}</p></html>",  
        :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
@@ -199,7 +199,7 @@ module GameStarter
        :from_name=> "EventStarter <noreply@eventstarter.co>",  
        :text=>"Your EventStarter event #{event_name} is on.  Please, plan on attending, since you are 'in'.",  
        :to=> mandrill_to_array,  
-       :html=>"<html><h2>Your EventStarter event #{event_name} is on!</h2><p>Please, plan on attending, since you are 'in'.</p></html>",  
+       :html=>"<html><h2>Your EventStarter event #{event_name} is on!</h2><p>Please, plan on attending, since you are 'in'.</p><p>Event Description: #{event_description}</p><p>Creator Name: #{creator_name}</p><p>Creator Phone: #{creator_phone}</p><p>Event Time: #{event_time}</p><p>Event Time: #{event_time}</p><p>Event Location: #{event_location}</p><p>Invitees: #{invitees}</p><p>Minimum Attendees: #{minimum_attendees}</p><p>Maximum Attendees: #{maximum_attendees}</p><p>Deadline: #{deadline}</p></html>",  
        :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
@@ -218,7 +218,7 @@ module GameStarter
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>Your EventStarter event '#{event_name}' is now on.</h2><p>#{event_name}</p><p>The minimum number has been met for this event, but the max has not yet been met.</p></html>",  
+       :html=>"<html><h2>Your EventStarter event '#{event_name}' is now on.</h2><p>#{event_name}</p><p>Event Description: #{event_description}</p><p>Creator Name: #{creator_name}</p><p>Creator Phone: #{creator_phone}</p><p>Event Time: #{event_time}</p><p>Event Time: #{event_time}</p><p>Event Location: #{event_location}</p><p>Invitees: #{invitees}</p><p>Minimum Attendees: #{minimum_attendees}</p><p>Maximum Attendees: #{maximum_attendees}</p><p>Deadline: #{deadline}</p><p>The minimum number has been met for this event, but the max has not yet been met.</p></html>",  
        :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
@@ -239,7 +239,7 @@ module GameStarter
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>Your EventStarter event #{event_name} is FULL.</h2><p>#{event_name}</p><p>The maximum number has been met for this event. Sorry, we hope to catch you next time.</p></html>",  
+       :html=>"<html><h2>Your EventStarter event #{event_name} is FULL.</h2><p>#{event_name}</p><p>Event Description: #{event_description}</p><p>Creator Name: #{creator_name}</p><p>Creator Phone: #{creator_phone}</p><p>Event Time: #{event_time}</p><p>Event Time: #{event_time}</p><p>Event Location: #{event_location}</p><p>Invitees: #{invitees}</p><p>Minimum Attendees: #{minimum_attendees}</p><p>Maximum Attendees: #{maximum_attendees}</p><p>Deadline: #{deadline}</p><p>The maximum number has been met for this event. Sorry, we hope to catch you next time.</p></html>",  
        :from_email=>"sender@eventstarter.com"  
       }  
       sending = m.messages.send message  
@@ -259,7 +259,7 @@ module GameStarter
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>EventStarter Event Created and Sent</h2><p>Event Name: #{event_name}</p><p>See Event coming soon(put in details).</p></html>",  
+       :html=>"<html><h2>EventStarter Event Created and Sent</h2><p>Event Name: #{event_name}</p><p>Event Description: #{event_description}</p><p>Creator Name: #{creator_name}</p><p>Creator Phone: #{creator_phone}</p><p>Event Time: #{event_time}</p><p>Event Time: #{event_time}</p><p>Event Location: #{event_location}</p><p>Invitees: #{invitees}</p><p>Minimum Attendees: #{minimum_attendees}</p><p>Maximum Attendees: #{maximum_attendees}</p><p>Deadline: #{deadline}</p></html>",  
        :from_email=>"sender@eventstarter.com"  
       }  
       sending = m.messages.send message  

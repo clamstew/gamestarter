@@ -57,9 +57,23 @@ post '/add_event' do
 
   @event_id = result.raw_body[9..-3]  
 
+
   # Send an email to invitees
+  params = {
+    creator_name: @creator_name,
+    description: @event_description,
+    creator_email: @creator_email,
+    creator_phone: @creator_phone,
+    event_time: @event_time,
+    event_location: @event_location,
+    invitees: @invitees,
+    minimum_attendees: @minimum_attendees,
+    maximum_attendees: @maximum_attendees,
+    deadline: @deadline 
+
+  }
   email = GameStarter::MandrillEmail.new()
-  email.send_are_you_in(new_event.invitees, @event_id.to_s, @event_name)
+  email.send_are_you_in(new_event.invitees, @event_id.to_s, @event_name, params)
 
   # Send email to event creator
   email2 = GameStarter::MandrillEmail.new()
