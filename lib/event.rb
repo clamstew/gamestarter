@@ -170,7 +170,7 @@ module GameStarter
        :text=>"You have a new EventStarter event. Are you in?",  
        :to=> mandrill_to_array,  
        
-       :html=>"<html><h2>Event Name: #{event_name}<p><a href=" + '"*|REPLYURL|*"' + ">RSVP and See Event Details.</a></p></h2><p>Event Description: #{event_description}</p><p>Creator Name: #{creator_name}</p><p>Creator Phone: #{creator_phone}</p><p>Event Time: #{event_time}</p><p>Event Time: #{event_time}</p><p>Event Location: #{event_location}</p><p>Invitees: #{invitees}</p><p>Minimum Attendees: #{minimum_attendees}</p><p>Maximum Attendees: #{maximum_attendees}</p><p>Deadline: #{deadline}</p></html>",  
+       :html=>"<html><h2>Event Name: #{event_name}<p><a href=" + '"*|REPLYURL|*"' + ">RSVP and See Event Details.</a></p></h2><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params[:creator_name]}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{params[:minimum_attendees]}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p></html>",  
        :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
@@ -180,7 +180,7 @@ module GameStarter
     # Sends the Game On email - if minimum has been met before deadline
     #
     #
-    def send_game_on(emails, event_id, event_name)
+    def send_game_on(emails, event_id, event_name, params)
       mandrill_to_array = []
       # mandrill_mergevars_array =[]
       emails.each do |email|
@@ -199,7 +199,7 @@ module GameStarter
        :from_name=> "EventStarter <noreply@eventstarter.co>",  
        :text=>"Your EventStarter event #{event_name} is on.  Please, plan on attending, since you are 'in'.",  
        :to=> mandrill_to_array,  
-       :html=>"<html><h2>Your EventStarter event #{event_name} is on!</h2><p>Please, plan on attending, since you are 'in'.</p><p>Event Description: #{event_description}</p><p>Creator Name: #{creator_name}</p><p>Creator Phone: #{creator_phone}</p><p>Event Time: #{event_time}</p><p>Event Time: #{event_time}</p><p>Event Location: #{event_location}</p><p>Invitees: #{invitees}</p><p>Minimum Attendees: #{minimum_attendees}</p><p>Maximum Attendees: #{maximum_attendees}</p><p>Deadline: #{deadline}</p></html>",  
+       :html=>"<html><h2>Your EventStarter event #{event_name} is on!</h2><p>Please, plan on attending, since you are 'in'.</p><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params[:creator_name]}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{params[:minimum_attendees]}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p></html>",  
        :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
@@ -208,7 +208,7 @@ module GameStarter
 
     # Sends Game On email to ONLY new recipients after minimum has been met 
     # -- but basically tell them its still cool to come b/c the max number has not been met
-    def send_game_already_on(email, event_id, event_name)
+    def send_game_already_on(email, event_id, event_name, params)
       m = Mandrill::API.new
       message = {   
        :subject=> "Game On: #{event_name}",  
@@ -218,7 +218,7 @@ module GameStarter
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>Your EventStarter event '#{event_name}' is now on.</h2><p>#{event_name}</p><p>Event Description: #{event_description}</p><p>Creator Name: #{creator_name}</p><p>Creator Phone: #{creator_phone}</p><p>Event Time: #{event_time}</p><p>Event Time: #{event_time}</p><p>Event Location: #{event_location}</p><p>Invitees: #{invitees}</p><p>Minimum Attendees: #{minimum_attendees}</p><p>Maximum Attendees: #{maximum_attendees}</p><p>Deadline: #{deadline}</p><p>The minimum number has been met for this event, but the max has not yet been met.</p></html>",  
+       :html=>"<html><h2>Your EventStarter event '#{event_name}' is now on.</h2><p>#{@event_name}</p><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params[:creator_name]}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{params[:minimum_attendees]}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p><p>The minimum number has been met for this event, but the max has not yet been met.</p></html>",  
        :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
@@ -229,7 +229,7 @@ module GameStarter
     #
     # 1) The minimum number was not met by the deadline
     # 2) The maximum number was reached by the time this user clicked the "I'm In" button
-    def send_game_rejection(email, event_id, event_name)
+    def send_game_rejection(email, event_id, event_name, params)
       m = Mandrill::API.new
       message = {   
        :subject=> "Game FULL: #{event_name}",  
@@ -239,7 +239,7 @@ module GameStarter
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>Your EventStarter event #{event_name} is FULL.</h2><p>#{event_name}</p><p>Event Description: #{event_description}</p><p>Creator Name: #{creator_name}</p><p>Creator Phone: #{creator_phone}</p><p>Event Time: #{event_time}</p><p>Event Time: #{event_time}</p><p>Event Location: #{event_location}</p><p>Invitees: #{invitees}</p><p>Minimum Attendees: #{minimum_attendees}</p><p>Maximum Attendees: #{maximum_attendees}</p><p>Deadline: #{deadline}</p><p>The maximum number has been met for this event. Sorry, we hope to catch you next time.</p></html>",  
+       :html=>"<html><h2>Your EventStarter event #{event_name} is FULL.</h2><p>#{event_name}</p><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{@minimum_attendees}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p><p>The maximum number has been met for this event. Sorry, we hope to catch you next time.</p></html>",  
        :from_email=>"sender@eventstarter.com"  
       }  
       sending = m.messages.send message  
@@ -249,7 +249,7 @@ module GameStarter
     # This method sends the email out to the Creator to confirm the event is created and the invitees list has been sent to
     # 
     # 
-    def send_event_create_confirmation(email, event_id, event_name)
+    def send_event_create_confirmation(email, event_id, event_name, params)
       m = Mandrill::API.new
       message = {   
        :subject=> "Event Created and Sent on EventStarter",  
@@ -259,7 +259,7 @@ module GameStarter
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>EventStarter Event Created and Sent</h2><p>Event Name: #{event_name}</p><p>Event Description: #{event_description}</p><p>Creator Name: #{creator_name}</p><p>Creator Phone: #{creator_phone}</p><p>Event Time: #{event_time}</p><p>Event Time: #{event_time}</p><p>Event Location: #{event_location}</p><p>Invitees: #{invitees}</p><p>Minimum Attendees: #{minimum_attendees}</p><p>Maximum Attendees: #{maximum_attendees}</p><p>Deadline: #{deadline}</p></html>",  
+       :html=>"<html><h2>EventStarter Event Created and Sent</h2><p>Event Name: #{@event_name}</p><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params[:creator_name]}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{params[:minimum_attendees]}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p></html>",  
        :from_email=>"sender@eventstarter.com"  
       }  
       sending = m.messages.send message  

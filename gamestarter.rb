@@ -77,7 +77,7 @@ post '/add_event' do
 
   # Send email to event creator
   email2 = GameStarter::MandrillEmail.new()
-  email2.send_event_create_confirmation(@creator_email, @event_id.to_s, @event_name)
+  email2.send_event_create_confirmation(@creator_email, @event_id.to_s, @event_name, params)
 
   erb :form_result
 end
