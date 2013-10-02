@@ -170,7 +170,7 @@ module GameStarter
        :text=>"You have a new EventStarter event. Are you in?",  
        :to=> mandrill_to_array,  
        
-       :html=>"<html><h2>Event Name: #{event_name}<p><a href=" + '"*|REPLYURL|*"' + ">RSVP and See Event Details.</a></p></h2><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params[:creator_name]}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{params[:minimum_attendees]}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p></html>",  
+       :html=>"<html><h2><p><a href=" + '"*|REPLYURL|*"' + ">RSVP Here.</a></p></h2><p>Event Name: #{event_name}</p><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params[:creator_name]}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{params[:minimum_attendees]}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p></html>",  
        :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
@@ -239,7 +239,7 @@ module GameStarter
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>Your EventStarter event #{event_name} is FULL.</h2><p>#{event_name}</p><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{@minimum_attendees}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p><p>The maximum number has been met for this event. Sorry, we hope to catch you next time.</p></html>",  
+       :html=>"<html><h2>Your EventStarter event #{event_name} is FULL.</h2></html>",  
        :from_email=>"sender@eventstarter.com"  
       }  
       sending = m.messages.send message  
@@ -259,7 +259,7 @@ module GameStarter
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>EventStarter Event Created and Sent</h2><p>Event Name: #{@event_name}</p><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params[:creator_name]}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{params[:minimum_attendees]}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p></html>",  
+       :html=>"<html><h2>EventStarter Event Created and Sent</h2><p>Event Name: #{params[:event_name]}</p><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params[:creator_name]}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{params[:minimum_attendees]}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p></html>",  
        :from_email=>"sender@eventstarter.com"  
       }  
       sending = m.messages.send message  

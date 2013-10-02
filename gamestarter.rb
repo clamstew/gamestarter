@@ -60,6 +60,7 @@ post '/add_event' do
 
   # Send an email to invitees
   params = {
+    event_name: @event_name,
     creator_name: @creator_name,
     description: @event_description,
     creator_email: @creator_email,
