@@ -199,7 +199,7 @@ module GameStarter
        :from_name=> "EventStarter <noreply@eventstarter.co>",  
        :text=>"Your EventStarter event #{event_name} is on.  Please, plan on attending, since you are 'in'.",  
        :to=> mandrill_to_array,  
-       :html=>"<html><h2>Your EventStarter event #{event_name} is on!</h2><p>Please, plan on attending, since you are 'in'.</p><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params[:creator_name]}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{params[:minimum_attendees]}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p></html>",  
+       :html=>"<html><h2>Your EventStarter event #{event_name} is on!</h2></html>",  
        :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
@@ -218,7 +218,7 @@ module GameStarter
           :email => "#{email}",
           :name => ""
         }],  
-       :html=>"<html><h2>Your EventStarter event '#{event_name}' is now on.</h2><p>#{@event_name}</p><p>Event Description: #{params[:description]}</p><p>Creator Name: #{params[:creator_name]}</p><p>Creator Phone: #{params[:creator_phone]}</p><p>Creator Email: #{params[:creator_email]}</p><p>Event Time: #{params[:event_time]}</p><p>Event Location: #{params[:event_location]}</p><p>Invitees: #{params[:invitees]}</p><p>Minimum Attendees: #{params[:minimum_attendees]}</p><p>Maximum Attendees: #{params[:maximum_attendees]}</p><p>Deadline: #{params[:deadline]}</p><p>The minimum number has been met for this event, but the max has not yet been met.</p></html>",  
+       :html=>"<html><h2>Your EventStarter event '#{event_name}' is now on.</h2><p>The minimum number has been met for this event, but the max has not yet been met.</p></html>",  
        :from_email=>"sender@eventstarter.co"  
       }  
       sending = m.messages.send message  
